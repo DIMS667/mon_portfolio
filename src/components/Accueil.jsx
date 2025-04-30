@@ -75,7 +75,7 @@ export default function Accueil() {
           variants={fadeUp}
           className="mx-auto mb-8 max-w-xl text-sm leading-relaxed text-gray-700 md:text-base"
         >
-          Passionné par la création d'expériences web fluides et performantes, j'allie le meilleur de Django et React pour bâtir des produits robustes, scalables et centrés sur l'utilisateur.
+          Fascinée par la création d’expériences web fluides et performantes, j’allie le meilleur de Django et React pour bâtir des produits robustes, scalables et centrés sur l’utilisateur.
         </motion.p>
 
         {/* Bouton CV */}
