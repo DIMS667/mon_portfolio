@@ -5,7 +5,7 @@ const experiences = [
   {
     entreprise: "POWERSOFT",
     titre: "Développeur Full‑stack",
-    periode: "Octobre 2024 – Aujourd’hui",
+    periode: "Octobre 2024 – Mars 2025",
     lieu: "Yaoundé",
     description:
       "Stage académique me permettant de développer mes compétences en backend (Django) et frontend (React), intégration, tests et déploiement.",

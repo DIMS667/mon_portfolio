@@ -56,19 +56,19 @@ export default function Competences() {
   return (
     <section
       id="competences"
-      className="relative isolate overflow-hidden bg-gradient-to-br from-[#FAFFF9] via-[#FDF9F3] to-[#F8F6FF] py-20"
+      className="relative isolate overflow-hidden bg-gradient-to-br from-[#FAFFF9] via-[#FDF9F3] to-[#F8F6FF] py-24"
     >
       {/* Décor en background */}
       <div className="absolute inset-y-0 right-1/2 -z-10 w-[150%] origin-top-right skew-x-[-45deg] bg-gradient-to-tr from-emerald-100/30 via-indigo-100/10 to-transparent backdrop-blur-2xl" />
 
-      <div className="max-w-6xl px-6 mx-auto">
-        {/* Titre principal */}
+      <div className="mx-auto max-w-6xl px-6">
+        {/* Titre principal harmonisé */}
         <motion.h2
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold tracking-tight text-emerald-700 mb-4"
+          className="mx-auto mb-14 max-w-max border-b-4 border-emerald-400 pb-2 text-3xl font-bold tracking-tight text-emerald-700 md:text-4xl"
         >
           Compétences Techniques
         </motion.h2>
@@ -77,19 +77,19 @@ export default function Competences() {
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="max-w-3xl text-sm md:text-base text-gray-700/90 leading-relaxed mb-12"
+          className="mx-auto mb-12 max-w-3xl text-sm leading-relaxed text-gray-700/90 md:text-base"
         >
-          Voici un aperçu de mes domaines de compétence clés en tant que développeur full-stack :
+          Voici un aperçu de mes domaines de compétence clés en tant que développeur full‑stack :
         </motion.p>
 
         {/* Liste par catégorie */}
         {competences.map((bloc, i) => (
           <div key={i} className="mb-14">
             {/* Titre de catégorie */}
-            <h3 className="flex items-center gap-2 text-lg md:text-xl font-semibold text-emerald-600 mb-6">
-              <span className="block w-5 h-[2px] bg-emerald-500" />
+            <h3 className="mb-6 flex items-center gap-2 text-lg font-semibold text-emerald-600 md:text-xl">
+              <span className="block h-[2px] w-5 bg-emerald-500" />
               {bloc.categorie}
             </h3>
 
@@ -99,12 +99,12 @@ export default function Competences() {
                 const Icon = item.icon;
                 return (
                   <motion.div
+                    key={j}
                     custom={j}
                     variants={cardVariants}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
-                    key={j}
                     className="group relative rounded-2xl bg-white/80 p-6 shadow-md ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                   >
                     {/* Effet d'anneau lumineux au survol */}

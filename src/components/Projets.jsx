@@ -7,20 +7,28 @@ const projets = [
     titre: "Portfolio Personnel",
     description: "Site personnel développé avec React.js, TailwindCSS et Framer Motion.",
     tags: ["React", "Tailwind", "Framer Motion"],
-    lien: "https://github.com/tonye/portfolio",
+    lien: "https://github.com/DIMS667/mon_portfolio.git",
   },
   {
-    titre: "API REST Django",
-    description: "API sécurisée pour application mobile, utilisant Django REST Framework.",
-    tags: ["Django", "DRF", "PostgreSQL"],
-    lien: "https://github.com/tonye/api-django",
+    titre: "API REST Django + Interface REACT JS (Application scolaire)",
+    description: "Développement d'une API REST avec Django REST Framework, intégrée à une interface utilisateur moderne construite avec React.js.",
+    tags: ["Django", "DRF", "sqlite"],
+    lien: "https://github.com/DIMS667/SITE-SCOLAIRE-API.git",
   },
   {
-    titre: "Dashboard Admin",
-    description: "Interface d'administration avec statistiques dynamiques.",
-    tags: ["React", "Chart.js", "Django"],
-    lien: "https://github.com/tonye/admin-dashboard",
+    titre: "Application de gestion d’une école ",
+    description: "Gérer l’ensemble des données d’une école.",
+    tags: ["Django","sqlite"],
+    lien: "https://github.com/DIMS667/Gestion_ecole.git",
   },
+  {
+    titre: "La Maison Bleue de Julien",
+    description: "Site web pour une association dédiée à l’autisme, avec une page d'accueil moderne et des sections interactives grâce à Magic UI.",
+    tags: ["React JS", "Mantine", "Magic UI", "intégration paiement CinetPAY"],
+    lien: "https://github.com/DIMS667/Maison-bleue-de-julien.git", // adapte ce lien selon le vrai dépôt
+  },
+  
+  
 ];
 
 // Animation Framer Motion
