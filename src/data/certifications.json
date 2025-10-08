@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "titre": "Responsive Web Design",
+    "organisme": "freeCodeCamp",
+    "categorie": "Frontend",
+    "date": "2024",
+    "url": "https://www.freecodecamp.org/certification/example",
+    "badge": "https://example.com/badge.png"
+  },
+  {
+    "id": 2,
+    "titre": "Introduction to Django",
+    "organisme": "Udemy",
+    "categorie": "Backend",
+    "date": "2024",
+    "url": "",
+    "badge": ""
+  },
+  {
+    "id": 3,
+    "titre": "Meta Front-End Developer",
+    "organisme": "Coursera / Meta",
+    "categorie": "Frontend",
+    "date": "2024",
+    "url": "https://coursera.org/verify/example",
+    "badge": ""
+  },
+  {
+    "id": 4,
+    "titre": "Développement Web",
+    "organisme": "OpenClassrooms",
+    "categorie": "Autres",
+    "date": "2023",
+    "url": "",
+    "badge": ""
+  }
+]

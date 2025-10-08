@@ -1,0 +1,41 @@
+[
+  {
+    "categorie": "Frontend",
+    "elements": [
+      {
+        "titre": "Connaissance en technologie frontend (React.js)",
+        "description": "Je maîtrise l'intégration d'une API dans un frontend.",
+        "icon": "LayoutPanelTop",
+        "niveau": 85
+      }
+    ]
+  },
+  {
+    "categorie": "Backend",
+    "elements": [
+      {
+        "titre": "Connaissance des technologies backend",
+        "description": "Je maîtrise le framework Django avec son modèle MVT pour la création d'applications web, mais je travaille aussi avec Laravel et son modèle MVC.",
+        "icon": "Code",
+        "niveau": 90
+      },
+      {
+        "titre": "Création et gestion des API (REST)",
+        "description": "Je suis capable de concevoir des API robustes et sécurisées.",
+        "icon": "Server",
+        "niveau": 88
+      }
+    ]
+  },
+  {
+    "categorie": "Bases de données",
+    "elements": [
+      {
+        "titre": "Gestion des bases de données (SQL / NoSQL)",
+        "description": "Je travaille avec des bases relationnelles (MySQL, PostgreSQL) et non relationnelles (MongoDB, Firebase), en structurant et interrogeant les données efficacement.",
+        "icon": "Database",
+        "niveau": 82
+      }
+    ]
+  }
+]

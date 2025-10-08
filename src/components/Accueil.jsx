@@ -1,36 +1,91 @@
 import { motion } from "framer-motion";
-import { Download, ChevronDown } from "lucide-react";
+import { Download, ChevronDown, Sparkles, Code2, Zap, Star, Rocket } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 import photo from "../assets/photo.jpg";
+import profileData from "../data/profile.json";
 
-// Animation variants
 const container = {
   hidden: {},
   visible: {
-    transition: {
-      staggerChildren: 0.3,
-    },
-  },
+    transition: { staggerChildren: 0.15 }
+  }
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 25 },
+  hidden: { opacity: 0, y: 60 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: "easeOut" },
-  },
+    transition: { duration: 0.8, ease: [0.6, 0.05, 0.01, 0.9] }
+  }
 };
 
 export default function Accueil() {
+  const { theme, mode, glassEffect } = useTheme();
+
+  // Couleurs dynamiques selon le mode
+  const bgColor = mode === "dark" ? theme.colors.bgDark : theme.colors.bg;
+  const textColor = mode === "dark" ? theme.colors.textDark : theme.colors.text;
+  const cardBg = mode === "dark" 
+    ? glassEffect ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.08)"
+    : glassEffect ? "rgba(255,255,255,0.6)" : "rgba(255,255,255,0.9)";
+
   return (
     <section
       id="accueil"
-      className="relative isolate flex min-h-screen items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top_left,theme(colors.emerald.50),theme(colors.indigo.50),white)] px-6 py-24 text-center"
+      className="relative isolate flex min-h-screen items-center justify-center overflow-hidden px-6 py-32"
+      style={{ background: bgColor }}
     >
-      {/* Blobs décoratifs */}
-      <div className="pointer-events-none absolute inset-0 -z-20">
-        <div className="animate-blob absolute -left-[10%] -top-[10%] h-72 w-72 rounded-full bg-emerald-100 opacity-60 blur-3xl" />
-        <div className="animation-delay-2000 animate-blob absolute -right-[8%] -bottom-[15%] h-80 w-80 rounded-full bg-indigo-100 opacity-50 blur-3xl" />
+      {/* Background animé */}
+      <div className="pointer-events-none absolute inset-0">
+        {/* Blobs animés */}
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, 50, 0],
+            y: [0, -30, 0]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -left-32 top-20 h-96 w-96 rounded-full opacity-20 blur-3xl"
+          style={{ background: theme.colors.primary }}
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, -50, 0],
+            y: [0, 30, 0]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -right-32 bottom-20 h-[32rem] w-[32rem] rounded-full opacity-20 blur-3xl"
+          style={{ background: theme.colors.secondary }}
+        />
+
+        {/* Particules flottantes */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              width: Math.random() * 8 + 3,
+              height: Math.random() * 8 + 3,
+              background: theme.colors.primary,
+              opacity: 0.3,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`
+            }}
+            animate={{
+              y: [0, -40, 0],
+              x: [0, Math.random() * 30 - 15, 0],
+              opacity: [0.2, 0.5, 0.2]
+            }}
+            transition={{
+              duration: 4 + Math.random() * 3,
+              delay: i * 0.3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
       </div>
 
       {/* Contenu principal */}
@@ -38,93 +93,216 @@ export default function Accueil() {
         variants={container}
         initial="hidden"
         animate="visible"
-        className="max-w-3xl"
+        className="relative z-10 max-w-5xl text-center"
       >
-        {/* Portrait */}
+        {/* Badge statut */}
         <motion.div
           variants={fadeUp}
-          className="relative mx-auto mb-8 h-48 w-48 overflow-hidden rounded-full shadow-xl ring-4 ring-white/60 transition-transform duration-500 hover:scale-105 md:h-56 md:w-56"
+          className="mb-8 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold shadow-lg"
+          style={{
+            background: cardBg,
+            backdropFilter: glassEffect ? "blur(12px)" : "none",
+            border: `1px solid ${mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+            color: theme.colors.primary
+          }}
         >
-          <img
-            src={photo}
-            alt="Portrait de Tonye Nwalal Jules Dimitri"
-            className="h-full w-full object-cover"
-            loading="lazy"
-          />
+          <Sparkles className="h-4 w-4" />
+          {profileData.status}
         </motion.div>
 
-        {/* Nom */}
+        {/* Portrait avec animation 3D */}
+        <motion.div
+          variants={fadeUp}
+          className="relative mx-auto mb-10 inline-block"
+        >
+          {/* Glow effect autour de la photo */}
+          <div
+            className="absolute -inset-4 rounded-full opacity-50 blur-2xl"
+            style={{
+              background: `radial-gradient(circle, ${theme.colors.primary}, ${theme.colors.secondary})`
+            }}
+          />
+          
+          <motion.div
+            whileHover={{ scale: 1.05, rotate: 2 }}
+            className="relative h-44 w-44 md:h-52 md:w-52"
+          >
+            <img
+              src={photo}
+              alt={profileData.nom_complet}
+              className="h-full w-full rounded-full object-cover shadow-2xl"
+              style={{
+                border: `4px solid ${mode === "dark" ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.8)"}`
+              }}
+            />
+            
+            {/* Icônes orbitales */}
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0"
+            >
+              <Code2
+                className="absolute -right-3 top-8 h-7 w-7 rounded-full p-1.5 shadow-lg"
+                style={{ 
+                  background: theme.colors.primary,
+                  color: "white"
+                }}
+              />
+              <Zap
+                className="absolute -left-3 bottom-8 h-7 w-7 rounded-full p-1.5 shadow-lg"
+                style={{ 
+                  background: theme.colors.secondary,
+                  color: "white"
+                }}
+              />
+              <Rocket
+                className="absolute right-8 -bottom-2 h-7 w-7 rounded-full p-1.5 shadow-lg"
+                style={{ 
+                  background: theme.colors.accent,
+                  color: "white"
+                }}
+              />
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
+        {/* Salutation */}
+        <motion.div variants={fadeUp} className="mb-4">
+          <span
+            className="text-xl font-medium md:text-2xl"
+            style={{ color: textColor }}
+          >
+            👋 Bonjour, je suis
+          </span>
+        </motion.div>
+
+        {/* Nom avec gradient animé */}
         <motion.h1
           variants={fadeUp}
-          className="mb-4 text-4xl font-extrabold leading-tight tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-lime-500 to-emerald-700 md:text-6xl"
+          className="mb-6 text-5xl font-extrabold leading-tight tracking-tight md:text-6xl lg:text-7xl"
+          style={{
+            background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary}, ${theme.colors.accent})`,
+            backgroundSize: "200% 200%",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            animation: "gradient-shift 8s ease infinite"
+          }}
         >
-          Bonjour, je suis
-          <br className="block md:hidden" /> Tonye&nbsp;Nwalal&nbsp;Jules&nbsp;Dimitri
+          {profileData.nom_complet}
         </motion.h1>
 
-        {/* Rôle */}
+        {/* Titre avec effet typing */}
+        <motion.div
+          variants={fadeUp}
+          className="mb-4"
+        >
+          <p
+            className="text-2xl font-bold uppercase tracking-wider md:text-3xl"
+            style={{ color: theme.colors.primary }}
+          >
+            {profileData.titre}
+          </p>
+        </motion.div>
+
+        {/* Spécialités */}
+        <motion.div variants={fadeUp} className="mb-8 flex flex-wrap justify-center gap-3">
+          {profileData.specialites.map((spec, i) => (
+            <motion.span
+              key={i}
+              whileHover={{ scale: 1.1, y: -2 }}
+              className="rounded-full px-5 py-2 text-sm font-semibold shadow-md"
+              style={{
+                background: `linear-gradient(135deg, ${theme.colors.primary}20, ${theme.colors.secondary}20)`,
+                color: theme.colors.primary,
+                border: `2px solid ${theme.colors.primary}40`
+              }}
+            >
+              {spec}
+            </motion.span>
+          ))}
+        </motion.div>
+
+        {/* Bio */}
         <motion.p
           variants={fadeUp}
-          className="mb-2 text-base font-semibold uppercase tracking-wider text-emerald-700 md:text-lg"
+          className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed md:text-xl"
+          style={{ color: textColor }}
         >
-          Développeur Full‑stack · Django / React.js
+          {profileData.bio}
         </motion.p>
 
-        {/* Accroche */}
-        <motion.p
+        {/* Statistiques */}
+        <motion.div
           variants={fadeUp}
-          className="mx-auto mb-8 max-w-xl text-sm leading-relaxed text-gray-700 md:text-base"
+          className="mx-auto mb-12 grid max-w-3xl grid-cols-3 gap-6"
         >
-          Fascinée par la création d’expériences web fluides et performantes, j’allie le meilleur de Django et React pour bâtir des produits robustes, scalables et centrés sur l’utilisateur.
-        </motion.p>
+          {[
+            { label: "Années", value: profileData.annees_experience + "+", icon: Star },
+            { label: "Projets", value: profileData.projets_realises + "+", icon: Rocket },
+            { label: "Technologies", value: profileData.technologies_maitrisees + "+", icon: Code2 }
+          ].map((stat, i) => {
+            const Icon = stat.icon;
+            return (
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="rounded-2xl p-6 shadow-xl"
+                style={{
+                  background: cardBg,
+                  backdropFilter: glassEffect ? "blur(12px)" : "none",
+                  border: `1px solid ${mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`
+                }}
+              >
+                <Icon className="mx-auto mb-2 h-6 w-6" style={{ color: theme.colors.primary }} />
+                <div
+                  className="mb-1 text-3xl font-extrabold md:text-4xl"
+                  style={{ color: theme.colors.primary }}
+                >
+                  {stat.value}
+                </div>
+                <div className="text-sm font-medium" style={{ color: textColor }}>
+                  {stat.label}
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
 
-        {/* Bouton CV */}
+        {/* CTA Button */}
         <motion.a
           variants={fadeUp}
-          href="/CV_TONYE%20NWALAL_JULES%20DIMITRI.pdf"
+          href={profileData.cv}
           download
-          aria-label="Télécharger le CV de Tonye Nwalal Jules Dimitri"
-          whileHover={{ scale: 1.06 }}
-          whileTap={{ scale: 0.94 }}
-          className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-8 py-3 font-medium text-white shadow-lg transition focus:outline-none focus:ring-4 focus:ring-emerald-300 hover:bg-emerald-500"
+          whileHover={{ scale: 1.08, boxShadow: `0 20px 40px ${theme.colors.primary}40` }}
+          whileTap={{ scale: 0.95 }}
+          className="inline-flex items-center gap-3 rounded-full px-10 py-5 text-lg font-bold text-white shadow-2xl"
+          style={{
+            background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`,
+            backgroundSize: "200% 200%",
+            animation: "gradient-shift 5s ease infinite"
+          }}
         >
-          <Download className="h-5 w-5" /> Télécharger mon CV
+          <Download className="h-6 w-6" />
+          Télécharger mon CV
         </motion.a>
       </motion.div>
 
-      {/* Flèche vers Projets - Positionnée en bas au centre */}
+      {/* Scroll indicator */}
       <motion.a
         href="#projets"
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        animate={{ y: [0, 12, 0] }}
-        transition={{ opacity: { duration: 0.8, delay: 1 }, y: { repeat: Infinity, duration: 1.8, ease: "easeInOut" } }}
-        className="pointer-events-auto absolute bottom-10 left-1/2 -translate-x-1/2 text-emerald-600"
-        aria-label="Faire défiler vers mes projets"
+        animate={{ opacity: 1, y: [0, 12, 0] }}
+        transition={{
+          opacity: { delay: 2 },
+          y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
+        }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        style={{ color: theme.colors.primary }}
       >
-        <ChevronDown className="h-8 w-8" />
+        <ChevronDown className="h-10 w-10" />
       </motion.a>
-
-      {/* Styles utilitaires pour l'animation des blobs */}
-      <style jsx global>{`
-        @keyframes blob {
-          0%, 100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(30px, -20px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
-        .animate-blob {
-          animation: blob 8s ease-in-out infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-      `}</style>
     </section>
   );
 }

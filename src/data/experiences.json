@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "entreprise": "POWERSOFT",
+    "titre": "Développeur Full‑stack",
+    "periode": "Octobre 2024 – Mars 2025",
+    "lieu": "Yaoundé",
+    "description": "Stage académique me permettant de développer mes compétences en backend (Django) et frontend (React), intégration, tests et déploiement.",
+    "logo": "",
+    "actuel": false
+  },
+  {
+    "id": 2,
+    "entreprise": "SINARES",
+    "titre": "Développeur Backend",
+    "periode": "Juillet – Septembre 2024",
+    "lieu": "Yaoundé",
+    "description": "Création d'API REST sécurisées, documentation technique et déploiement. Approfondissement des outils backend et bases de données.",
+    "logo": "",
+    "actuel": false
+  }
+]

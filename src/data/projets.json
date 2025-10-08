@@ -1,0 +1,30 @@
+[
+
+  {
+    "id": 1,
+    "titre": "API REST Django + Interface REACT JS",
+    "description": "Développement d'une API REST avec Django REST Framework, intégrée à une interface utilisateur moderne construite avec React.js.",
+    "tags": ["Django", "DRF", "sqlite"],
+    "lien": "https://github.com/DIMS667/SITE-SCOLAIRE-API.git",
+    "featured": false,
+    "image": ""
+  },
+  {
+    "id": 2,
+    "titre": "Application de gestion d'une école",
+    "description": "Gérer l'ensemble des données d'une école.",
+    "tags": ["Django", "sqlite"],
+    "lien": "https://github.com/DIMS667/Gestion_ecole.git",
+    "featured": false,
+    "image": ""
+  },
+  {
+    "id": 3,
+    "titre": "La Maison Bleue de Julien",
+    "description": "Site web pour une association dédiée à l'autisme, avec une page d'accueil moderne et des sections interactives grâce à Magic UI.",
+    "tags": ["React JS", "Mantine", "Magic UI", "CinetPAY"],
+    "lien": "https://github.com/DIMS667/Maison-bleue-de-julien.git",
+    "featured": false,
+    "image": ""
+  }
+]

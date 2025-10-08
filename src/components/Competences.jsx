@@ -1,126 +1,216 @@
 import { motion } from "framer-motion";
-import { Server, LayoutPanelTop, Code, Database } from "lucide-react";
+import { Server, LayoutPanelTop, Code, Database, Zap } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
+import competencesData from "../data/competences.json";
 
-// Compétences regroupées par catégorie
-const competences = [
-  {
-    categorie: "Frontend",
-    elements: [
-      {
-        titre: "Connaissance en technologie frontend (React.js)",
-        description: "Je maîtrise l'intégration d'une API dans un frontend.",
-        icon: LayoutPanelTop,
-      },
-    ],
-  },
-  {
-    categorie: "Backend",
-    elements: [
-      {
-        titre: "Connaissance des technologies backend",
-        description:
-          "Je maîtrise le framework Django avec son modèle MVT pour la création d'applications web, mais je travaille aussi avec Laravel et son modèle MVC, qui est semblable au modèle MVT.",
-        icon: Code,
-      },
-      {
-        titre: "Création et gestion des API (REST)",
-        description: "Je suis capable de concevoir des API robustes et sécurisées.",
-        icon: Server,
-      },
-    ],
-  },
-  {
-    categorie: "Bases de données",
-    elements: [
-      {
-        titre: "Gestion des bases de données (SQL / NoSQL)",
-        description:
-          "Je travaille avec des bases relationnelles (MySQL, PostgreSQL) et non relationnelles (MongoDB, Firebase), en structurant et interrogeant les données efficacement.",
-        icon: Database,
-      },
-    ],
-  },
-];
+// Map des icônes
+const iconMap = {
+  Server,
+  LayoutPanelTop,
+  Code,
+  Database,
+  Zap
+};
 
-// Variants pour une animation d'apparition fluide
 const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 30, rotateX: -15 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.15 },
-  }),
+    rotateX: 0,
+    transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" }
+  })
 };
 
+// Barre de progression circulaire
+function CircularProgress({ niveau, color, mode }) {
+  const circumference = 2 * Math.PI * 45;
+  const offset = circumference - (niveau / 100) * circumference;
+
+  return (
+    <svg className="h-32 w-32" viewBox="0 0 100 100">
+      {/* Cercle de fond */}
+      <circle
+        cx="50"
+        cy="50"
+        r="45"
+        fill="none"
+        stroke={mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}
+        strokeWidth="8"
+      />
+      {/* Cercle de progression */}
+      <motion.circle
+        cx="50"
+        cy="50"
+        r="45"
+        fill="none"
+        stroke={color}
+        strokeWidth="8"
+        strokeLinecap="round"
+        strokeDasharray={circumference}
+        strokeDashoffset={circumference}
+        animate={{ strokeDashoffset: offset }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        style={{ transformOrigin: "50% 50%", transform: "rotate(-90deg)" }}
+      />
+      {/* Pourcentage au centre */}
+      <text
+        x="50"
+        y="50"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        className="text-2xl font-bold"
+        fill={color}
+      >
+        {niveau}%
+      </text>
+    </svg>
+  );
+}
+
 export default function Competences() {
+  const { theme, mode, glassEffect } = useTheme();
+
   return (
     <section
       id="competences"
-      className="relative isolate overflow-hidden bg-gradient-to-br from-[#FAFFF9] via-[#FDF9F3] to-[#F8F6FF] py-24"
+      className="relative isolate overflow-hidden py-24"
+      style={{
+        background: mode === "dark"
+          ? `radial-gradient(circle at top right, ${theme.colors.bg} 0%, ${theme.colors.bgDark} 100%)`
+          : `radial-gradient(circle at top right, white 0%, ${theme.colors.bg} 100%)`
+      }}
     >
-      {/* Décor en background */}
-      <div className="absolute inset-y-0 right-1/2 -z-10 w-[150%] origin-top-right skew-x-[-45deg] bg-gradient-to-tr from-emerald-100/30 via-indigo-100/10 to-transparent backdrop-blur-2xl" />
+      {/* Décor */}
+      <motion.div
+        animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+        transition={{ duration: 20, repeat: Infinity }}
+        className="pointer-events-none absolute left-10 top-32 h-80 w-80 rounded-full opacity-10 blur-3xl"
+        style={{ background: theme.colors.secondary }}
+      />
 
-      <div className="mx-auto max-w-6xl px-6">
-        {/* Titre principal harmonisé */}
-        <motion.h2
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
+      <div className="mx-auto max-w-7xl px-6">
+        {/* Titre */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="mx-auto mb-14 max-w-max border-b-4 border-emerald-400 pb-2 text-3xl font-bold tracking-tight text-emerald-700 md:text-4xl"
+          className="mb-16 text-center"
         >
-          Compétences Techniques
-        </motion.h2>
+          <div className="mb-4 flex items-center justify-center gap-3">
+            <Zap className="h-8 w-8" style={{ color: theme.colors.primary }} />
+            <h2
+              className="text-4xl font-extrabold md:text-5xl"
+              style={{
+                background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text"
+              }}
+            >
+              Compétences Techniques
+            </h2>
+          </div>
+          <p
+            className="mx-auto max-w-2xl text-base md:text-lg"
+            style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
+          >
+            Un aperçu de mes domaines d'expertise en développement full‑stack
+          </p>
+        </motion.div>
 
-        {/* Intro */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="mx-auto mb-12 max-w-3xl text-sm leading-relaxed text-gray-700/90 md:text-base"
-        >
-          Voici un aperçu de mes domaines de compétence clés en tant que développeur full‑stack :
-        </motion.p>
-
-        {/* Liste par catégorie */}
-        {competences.map((bloc, i) => (
-          <div key={i} className="mb-14">
-            {/* Titre de catégorie */}
-            <h3 className="mb-6 flex items-center gap-2 text-lg font-semibold text-emerald-600 md:text-xl">
-              <span className="block h-[2px] w-5 bg-emerald-500" />
+        {/* Par catégorie */}
+        {competencesData.map((bloc, idx) => (
+          <div key={idx} className="mb-20">
+            {/* Titre catégorie */}
+            <motion.h3
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="mb-10 flex items-center gap-3 text-2xl font-bold md:text-3xl"
+              style={{ color: theme.colors.primary }}
+            >
+              <span
+                className="block h-1 w-12 rounded-full"
+                style={{ background: theme.colors.primary }}
+              />
               {bloc.categorie}
-            </h3>
+            </motion.h3>
 
-            {/* Cartes individuelles */}
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {bloc.elements.map((item, j) => {
-                const Icon = item.icon;
+            {/* Grille de cartes */}
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {bloc.elements.map((item, i) => {
+                const Icon = iconMap[item.icon] || Code;
                 return (
                   <motion.div
-                    key={j}
-                    custom={j}
+                    key={i}
+                    custom={i}
                     variants={cardVariants}
                     initial="hidden"
                     whileInView="visible"
-                    viewport={{ once: true }}
-                    className="group relative rounded-2xl bg-white/80 p-6 shadow-md ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    viewport={{ once: true, margin: "-50px" }}
+                    whileHover={{ scale: 1.03, rotateY: 5 }}
+                    className="group relative overflow-hidden rounded-3xl p-8 shadow-xl"
+                    style={{
+                      background: glassEffect
+                        ? "rgba(255,255,255,0.1)"
+                        : mode === "dark"
+                        ? "rgba(255,255,255,0.05)"
+                        : "white",
+                      backdropFilter: glassEffect ? "blur(20px)" : "none",
+                      border: `1px solid ${mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`,
+                      perspective: 1000
+                    }}
                   >
-                    {/* Effet d'anneau lumineux au survol */}
-                    <span className="pointer-events-none absolute inset-px rounded-[inherit] bg-gradient-to-br from-emerald-400/20 to-violet-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    {/* Glow effect */}
+                    <div
+                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      style={{
+                        background: `radial-gradient(circle at top left, ${theme.colors.primary}20, transparent)`
+                      }}
+                    />
 
-                    <div className="relative z-10 flex items-start gap-4">
-                      <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 transition-colors duration-300 group-hover:bg-emerald-500/10">
-                        <Icon className="h-6 w-6 text-emerald-600 transition-transform duration-300 group-hover:scale-110" />
-                      </span>
-                      <h4 className="text-base font-semibold text-emerald-700">
+                    <div className="relative z-10">
+                      {/* Icône + Niveau */}
+                      <div className="mb-6 flex items-start justify-between">
+                        <div
+                          className="flex h-16 w-16 items-center justify-center rounded-2xl transition-transform group-hover:scale-110"
+                          style={{
+                            background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`
+                          }}
+                        >
+                          <Icon className="h-8 w-8 text-white" />
+                        </div>
+
+                        {/* Niveau en cercle */}
+                        {item.niveau && (
+                          <div className="flex flex-col items-center">
+                            <CircularProgress niveau={item.niveau} color={theme.colors.primary} />
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Titre */}
+                      <h4
+                        className="mb-3 text-lg font-bold"
+                        style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
+                      >
                         {item.titre}
                       </h4>
+
+                      {/* Description */}
+                      <p
+                        className="text-sm leading-relaxed"
+                        style={{ 
+                          color: mode === "dark" 
+                            ? `${theme.colors.textDark}cc` 
+                            : `${theme.colors.text}cc`
+                        }}
+                      >
+                        {item.description}
+                      </p>
                     </div>
-                    <p className="relative z-10 mt-4 text-sm leading-relaxed text-gray-600">
-                      {item.description}
-                    </p>
                   </motion.div>
                 );
               })}

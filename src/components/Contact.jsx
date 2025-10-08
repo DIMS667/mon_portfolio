@@ -1,97 +1,258 @@
 import { motion } from "framer-motion";
-import { Mail, Github, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle, Phone, Github, Linkedin, Twitter, Send, MapPin } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
+import contactData from "../data/contact.json";
 
-const contacts = [
-  {
-    label: "Écrire sur WhatsApp",
-    href: "https://api.whatsapp.com/send?phone=237694478577&text=Bonjour%2C%20je%20viens%20de%20visiter%20votre%20portfolio%20et%20je%20souhaite%20vous%20contacter.",
-    icon: MessageCircle,
-  },
-  {
-    label: "tonyenwalal@gmail.com",
-    href: "mailto:tonyenwalal@gmail.com",
-    icon: Mail,
-  },
-];
+const iconMap = {
+  Mail,
+  MessageCircle,
+  Phone,
+  Github,
+  Linkedin,
+  Twitter
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.1 }
+  })
+};
 
 export default function Contact() {
+  const { theme, mode, glassEffect } = useTheme();
+
   return (
     <section
       id="contact"
-      className="relative isolate overflow-hidden bg-gradient-to-br from-[#FAFFF9] via-[#FDF9F3] to-[#F8F6FF] px-6 py-24 text-center"
+      className="relative isolate overflow-hidden px-6 py-24"
+      style={{
+        background: mode === "dark"
+          ? `linear-gradient(135deg, ${theme.colors.bgDark} 0%, ${theme.colors.bg} 100%)`
+          : `linear-gradient(135deg, white 0%, ${theme.colors.bg} 100%)`
+      }}
     >
-      {/* décor flou */}
-      <div className="pointer-events-none absolute -z-10 right-1/2 top-0 h-[120%] w-[160%] origin-top-right skew-x-[-45deg] bg-gradient-to-tr from-emerald-100/30 via-indigo-100/10 to-transparent backdrop-blur-2xl" />
-
-      {/* Titre */}
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-        className="mx-auto mb-10 max-w-max border-b-4 border-emerald-400 pb-2 text-3xl font-bold tracking-tight text-emerald-700 md:text-4xl"
-      >
-        Contact & Réseaux
-      </motion.h2>
-
-      {/* Intro */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-        className="mx-auto mb-16 max-w-2xl text-sm leading-relaxed text-gray-700 md:text-base"
-      >
-        N'hésitez pas à me contacter pour une collaboration, un projet ou toute autre demande professionnelle.
-      </motion.p>
-
-      {/* Cartes de contact */}
-      <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
-        {contacts.map((item, i) => {
-          const Icon = item.icon;
-          return (
-            <motion.a
-              key={i}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ y: -4, boxShadow: "0 12px 25px rgba(0,0,0,0.1)" }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative flex items-center gap-3 rounded-3xl bg-white/80 p-5 text-emerald-700 shadow-md ring-1 ring-black/5 transition-all duration-300"
-            >
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50 transition-colors group-hover:bg-emerald-500/10">
-                <Icon className="h-6 w-6 transition-transform group-hover:scale-110" />
-              </span>
-              <span className="text-sm font-medium md:text-base">{item.label}</span>
-
-              {/* Halo */}
-              <span className="pointer-events-none absolute inset-px rounded-[inherit] bg-gradient-to-br from-emerald-400/20 to-violet-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            </motion.a>
-          );
-        })}
-      </div>
-
-      {/* Réseaux sociaux */}
+      {/* Décor */}
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.7, delay: 0.3 }}
-        viewport={{ once: true }}
-        className="mt-16 flex justify-center gap-6"
-      >
-        <a
-          href="https://github.com/DIMS667"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub"
-          className="text-emerald-600 transition-transform duration-300 hover:scale-110 hover:text-gray-800"
+        animate={{ 
+          scale: [1, 1.2, 1],
+          rotate: [0, 180, 360]
+        }}
+        transition={{ duration: 30, repeat: Infinity }}
+        className="pointer-events-none absolute right-10 top-20 h-96 w-96 rounded-full opacity-10 blur-3xl"
+        style={{ background: theme.colors.accent }}
+      />
+
+      <div className="mx-auto max-w-6xl">
+        {/* Titre */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-16 text-center"
         >
-          <Github className="h-8 w-8" />
-        </a>
-      </motion.div>
+          <div className="mb-4 flex items-center justify-center gap-3">
+            <Send className="h-8 w-8" style={{ color: theme.colors.primary }} />
+            <h2
+              className="text-4xl font-extrabold md:text-5xl"
+              style={{
+                background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text"
+              }}
+            >
+              Contact & Réseaux
+            </h2>
+          </div>
+          <p
+            className="mx-auto max-w-2xl text-base md:text-lg"
+            style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
+          >
+            {contactData.disponibilite}
+          </p>
+        </motion.div>
+
+        {/* Info principale */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="mb-16 rounded-3xl p-8 text-center shadow-2xl"
+          style={{
+            background: glassEffect
+              ? "rgba(255,255,255,0.1)"
+              : mode === "dark"
+              ? "rgba(255,255,255,0.05)"
+              : "white",
+            backdropFilter: glassEffect ? "blur(20px)" : "none",
+            border: `2px solid ${theme.colors.primary}30`
+          }}
+        >
+          <div className="mb-4 flex items-center justify-center gap-2">
+            <MapPin className="h-5 w-5" style={{ color: theme.colors.primary }} />
+            <span
+              className="text-lg font-semibold"
+              style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
+            >
+              {contactData.location}
+            </span>
+          </div>
+          <p
+            className="text-sm"
+            style={{ color: mode === "dark" ? `${theme.colors.textDark}aa` : `${theme.colors.text}aa` }}
+          >
+            N'hésitez pas à me contacter pour une collaboration, un projet ou toute autre demande professionnelle
+          </p>
+        </motion.div>
+
+        {/* Méthodes de contact */}
+        <div className="mb-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {contactData.methodes_contact.map((method, i) => {
+            const Icon = iconMap[method.icon] || Mail;
+            return (
+              <motion.a
+                key={method.id}
+                href={method.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                custom={i}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                whileHover={{ y: -8, scale: 1.03 }}
+                className="group relative overflow-hidden rounded-3xl p-6 shadow-xl"
+                style={{
+                  background: glassEffect
+                    ? "rgba(255,255,255,0.1)"
+                    : mode === "dark"
+                    ? "rgba(255,255,255,0.05)"
+                    : "white",
+                  backdropFilter: glassEffect ? "blur(20px)" : "none",
+                  border: `1px solid ${mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`
+                }}
+              >
+                {/* Glow */}
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  style={{
+                    background: `radial-gradient(circle at center, ${method.color}20, transparent)`
+                  }}
+                />
+
+                <div className="relative z-10 flex items-center gap-4">
+                  {/* Icône */}
+                  <div
+                    className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl transition-transform group-hover:scale-110 group-hover:rotate-6"
+                    style={{
+                      background: `${method.color}20`
+                    }}
+                  >
+                    <Icon className="h-7 w-7" style={{ color: method.color }} />
+                  </div>
+
+                  {/* Texte */}
+                  <div className="flex-1">
+                    <p
+                      className="mb-1 text-xs font-semibold uppercase tracking-wider"
+                      style={{ color: method.color }}
+                    >
+                      {method.label}
+                    </p>
+                    <p
+                      className="text-sm font-medium"
+                      style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
+                    >
+                      {method.value}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Border glow */}
+                <div
+                  className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  style={{
+                    boxShadow: `0 0 30px ${method.color}40`
+                  }}
+                />
+              </motion.a>
+            );
+          })}
+        </div>
+
+        {/* Réseaux sociaux */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <p
+            className="mb-6 text-sm font-semibold uppercase tracking-wider"
+            style={{ color: theme.colors.primary }}
+          >
+            Suivez-moi
+          </p>
+          <div className="flex justify-center gap-4">
+            {contactData.reseaux.map((reseau, i) => {
+              const Icon = iconMap[reseau.icon] || Github;
+              return (
+                <motion.a
+                  key={reseau.id}
+                  href={reseau.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex h-14 w-14 items-center justify-center rounded-2xl transition-all"
+                  style={{
+                    background: glassEffect
+                      ? "rgba(255,255,255,0.1)"
+                      : mode === "dark"
+                      ? "rgba(255,255,255,0.05)"
+                      : "rgba(0,0,0,0.05)",
+                    backdropFilter: glassEffect ? "blur(10px)" : "none"
+                  }}
+                  aria-label={reseau.nom}
+                >
+                  <Icon className="h-6 w-6" style={{ color: theme.colors.primary }} />
+                </motion.a>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        {/* Footer */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-20 text-center"
+        >
+          <p
+            className="text-sm"
+            style={{ color: mode === "dark" ? `${theme.colors.textDark}77` : `${theme.colors.text}77` }}
+          >
+            Conçu et développé par moi , Tonye Nwalal Jules Dimitri
+          </p>
+          <p
+            className="mt-2 text-xs"
+            style={{ color: mode === "dark" ? `${theme.colors.textDark}55` : `${theme.colors.text}55` }}
+          >
+            © 2025 - Tous droits réservés
+          </p>
+        </motion.div>
+      </div>
     </section>
   );
 }
