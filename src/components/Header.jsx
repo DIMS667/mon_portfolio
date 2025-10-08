@@ -7,7 +7,9 @@ const links = [
   { label: "Projets", href: "#projets" },
   { label: "Compétences", href: "#competences" },
   { label: "Expérience", href: "#experience" },
+  { label: "certifications", href: "#certifications" },
   { label: "Contact", href: "#contact" },
+  
 ];
 
 export default function Header() {
