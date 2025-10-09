@@ -23,7 +23,6 @@ export default function ThemeCustomizer() {
     themesConfig 
   } = useTheme();
 
-  // Fallback si themesConfig n'est pas chargé
   const backgrounds = themesConfig?.backgrounds || [
     { id: "mesh", name: "Mesh Gradient" },
     { id: "particles", name: "Particules" },
@@ -33,12 +32,12 @@ export default function ThemeCustomizer() {
 
   return (
     <>
-      {/* Bouton flottant */}
+      {/* Bouton flottant - CORRECTION: z-index réduit pour ne pas gêner */}
       <motion.button
         onClick={() => setOpen(true)}
         whileHover={{ scale: 1.1, rotate: 180 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed bottom-8 right-8 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-2xl transition-all"
+        className="fixed bottom-8 right-8 z-40 flex h-14 w-14 items-center justify-center rounded-full shadow-2xl transition-all"
         style={{ 
           background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})` 
         }}
@@ -51,27 +50,27 @@ export default function ThemeCustomizer() {
       <AnimatePresence>
         {open && (
           <>
-            {/* Overlay */}
+            {/* Overlay - CORRECTION: z-index ajusté */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm"
+              className="fixed inset-0 z-[998] bg-black/40 backdrop-blur-sm"
             />
 
-            {/* Panel */}
+            {/* Panel - CORRECTION: z-index ajusté pour rester sous le header */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 z-[70] h-full w-full max-w-md overflow-y-auto bg-white shadow-2xl sm:w-96"
+              className="fixed right-0 top-0 z-[999] h-full w-full max-w-md overflow-y-auto shadow-2xl sm:w-96"
               style={{ 
                 background: mode === "dark" ? theme.colors.bgDark : "white"
               }}
             >
-              {/* Header */}
+              {/* Header - CORRECTION: sticky avec bon z-index */}
               <div className="sticky top-0 z-10 flex items-center justify-between border-b p-6"
                 style={{
                   borderColor: mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",

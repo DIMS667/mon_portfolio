@@ -1,37 +1,28 @@
 [
   {
     "id": 1,
-    "titre": "Responsive Web Design",
-    "organisme": "freeCodeCamp",
-    "categorie": "Frontend",
-    "date": "2024",
-    "url": "https://www.freecodecamp.org/certification/example",
-    "badge": "https://example.com/badge.png"
+    "titre": "Python Programming",
+    "organisme": "Udemy",
+    "categorie": "Backend",
+    "date": "2025",
+    "url": "",
+    "badge": ""
   },
   {
     "id": 2,
-    "titre": "Introduction to Django",
+    "titre": "Learn Django Web Development with Python Programming in This Hands-On Python Bootcamp",
     "organisme": "Udemy",
     "categorie": "Backend",
-    "date": "2024",
+    "date": "2025",
     "url": "",
     "badge": ""
   },
   {
     "id": 3,
-    "titre": "Meta Front-End Developer",
-    "organisme": "Coursera / Meta",
-    "categorie": "Frontend",
-    "date": "2024",
-    "url": "https://coursera.org/verify/example",
-    "badge": ""
-  },
-  {
-    "id": 4,
-    "titre": "Développement Web",
-    "organisme": "OpenClassrooms",
+    "titre": "Master English conversation and start speaking like an American",
+    "organisme": "Udemy",
     "categorie": "Autres",
-    "date": "2023",
+    "date": "2025",
     "url": "",
     "badge": ""
   }

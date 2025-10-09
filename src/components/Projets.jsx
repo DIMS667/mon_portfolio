@@ -34,12 +34,9 @@ export default function Projets() {
     <section
       id="projets"
       className="relative isolate overflow-hidden px-6 py-24"
-      style={{
-        background: mode === "dark"
-          ? `linear-gradient(180deg, ${theme.colors.bgDark} 0%, ${theme.colors.bg} 100%)`
-          : `linear-gradient(180deg, ${theme.colors.bg} 0%, white 100%)`
-      }}
     >
+      {/* CORRECTION: Suppression du background qui cachait le fond d'écran */}
+
       {/* Décor animé */}
       <motion.div
         animate={{ rotate: 360 }}
@@ -59,13 +56,11 @@ export default function Projets() {
         >
           <div className="mb-4 flex items-center justify-center gap-3">
             <Code2 className="h-8 w-8" style={{ color: theme.colors.primary }} />
+            {/* CORRECTION: Titre avec couleur solide au lieu de gradient transparent */}
             <h2
               className="text-4xl font-extrabold md:text-5xl"
               style={{
-                background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text"
+                color: mode === "dark" ? theme.colors.textDark : theme.colors.text
               }}
             >
               Mes Projets

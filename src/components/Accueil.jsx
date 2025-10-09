@@ -24,7 +24,6 @@ export default function Accueil() {
   const { theme, mode, glassEffect } = useTheme();
 
   // Couleurs dynamiques selon le mode
-  const bgColor = mode === "dark" ? theme.colors.bgDark : theme.colors.bg;
   const textColor = mode === "dark" ? theme.colors.textDark : theme.colors.text;
   const cardBg = mode === "dark" 
     ? glassEffect ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.08)"
@@ -34,8 +33,9 @@ export default function Accueil() {
     <section
       id="accueil"
       className="relative isolate flex min-h-screen items-center justify-center overflow-hidden px-6 py-32"
-      style={{ background: bgColor }}
     >
+      {/* CORRECTION: Suppression du style background pour utiliser le fond global */}
+
       {/* Background animé */}
       <div className="pointer-events-none absolute inset-0">
         {/* Blobs animés */}
@@ -177,17 +177,13 @@ export default function Accueil() {
           </span>
         </motion.div>
 
-        {/* Nom avec gradient animé */}
+        {/* Nom - CORRECTION: Couleur solide visible */}
         <motion.h1
           variants={fadeUp}
           className="mb-6 text-5xl font-extrabold leading-tight tracking-tight md:text-6xl lg:text-7xl"
           style={{
-            background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary}, ${theme.colors.accent})`,
-            backgroundSize: "200% 200%",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-            animation: "gradient-shift 8s ease infinite"
+            color: mode === "dark" ? theme.colors.textDark : theme.colors.text,
+            textShadow: `0 0 40px ${theme.colors.primary}40`
           }}
         >
           {profileData.nom_complet}

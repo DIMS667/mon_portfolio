@@ -75,12 +75,9 @@ export default function Competences() {
     <section
       id="competences"
       className="relative isolate overflow-hidden py-24"
-      style={{
-        background: mode === "dark"
-          ? `radial-gradient(circle at top right, ${theme.colors.bg} 0%, ${theme.colors.bgDark} 100%)`
-          : `radial-gradient(circle at top right, white 0%, ${theme.colors.bg} 100%)`
-      }}
     >
+      {/* CORRECTION: Suppression du background qui cachait le fond d'écran */}
+
       {/* Décor */}
       <motion.div
         animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
@@ -100,13 +97,11 @@ export default function Competences() {
         >
           <div className="mb-4 flex items-center justify-center gap-3">
             <Zap className="h-8 w-8" style={{ color: theme.colors.primary }} />
+            {/* CORRECTION: Titre avec couleur solide */}
             <h2
               className="text-4xl font-extrabold md:text-5xl"
               style={{
-                background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text"
+                color: mode === "dark" ? theme.colors.textDark : theme.colors.text
               }}
             >
               Compétences Techniques
@@ -129,7 +124,7 @@ export default function Competences() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="mb-10 flex items-center gap-3 text-2xl font-bold md:text-3xl"
-              style={{ color: theme.colors.primary }}
+              style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
             >
               <span
                 className="block h-1 w-12 rounded-full"
@@ -186,7 +181,7 @@ export default function Competences() {
                         {/* Niveau en cercle */}
                         {item.niveau && (
                           <div className="flex flex-col items-center">
-                            <CircularProgress niveau={item.niveau} color={theme.colors.primary} />
+                            <CircularProgress niveau={item.niveau} color={theme.colors.primary} mode={mode} />
                           </div>
                         )}
                       </div>

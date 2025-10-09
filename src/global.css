@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Variables CSS pour le thème dynamique */
+/* ========================================
+   VARIABLES CSS POUR LE THÈME DYNAMIQUE
+   ======================================== */
 :root {
   --color-primary: #10b981;
   --color-secondary: #059669;
@@ -16,6 +18,9 @@
   --glass-effect: 1;
 }
 
+/* ========================================
+   RESET ET BASE
+   ======================================== */
 @layer base {
   * {
     margin: 0;
@@ -27,29 +32,42 @@
     scroll-behavior: smooth;
   }
 
+  /* Le body a juste une couleur de base, les animations sont gérées par React */
   body {
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    min-height: 100vh;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
   }
 
-  /* Espacements sections */
+  /* CRITIQUE: Sections transparentes pour voir le fond animé */
   section {
     @apply py-20;
+    position: relative;
+    z-index: 1;
+    background: transparent !important;
   }
 
   section:first-of-type {
     @apply pt-32;
   }
+
+  /* Contenu des sections au-dessus */
+  section > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
+/* ========================================
+   CLASSES UTILITAIRES
+   ======================================== */
 @layer utilities {
-  /* Classes utilitaires personnalisées */
   .bg-theme {
     background-color: var(--color-bg);
   }
@@ -78,13 +96,15 @@
   }
 }
 
-/* Scrollbar */
+/* ========================================
+   SCROLLBAR
+   ======================================== */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg);
+  background: var(--color-bg-dark);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -92,19 +112,30 @@
   border-radius: 5px;
 }
 
-/* Selection */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-secondary);
+}
+
+/* ========================================
+   SÉLECTION
+   ======================================== */
 ::selection {
   background: var(--color-primary);
   color: white;
 }
 
-/* Focus */
+/* ========================================
+   FOCUS
+   ======================================== */
 *:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+  border-radius: 4px;
 }
 
-/* Animations */
+/* ========================================
+   ANIMATIONS
+   ======================================== */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-20px); }
@@ -132,4 +163,17 @@
 
 .animate-blob {
   animation: blob 8s ease-in-out infinite;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  section {
+    @apply py-16;
+  }
+
+  section:first-of-type {
+    @apply pt-24;
+  }
 }

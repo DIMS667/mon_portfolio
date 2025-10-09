@@ -1,5 +1,31 @@
 [
-
+  {
+    "id": 4,
+    "titre": "Template d'IA avec React.js",
+    "description": "Template d'intelligence artificielle développé avec React.js, offrant une interface moderne et réactive pour intégrer des fonctionnalités d'IA dans des applications web.",
+    "tags": ["React JS", "Intelligence Artificielle", "Template", "Frontend"],
+    "lien": "https://github.com/DIMS667/complexity",
+    "featured": true,
+    "image": ""
+  },
+  {
+    "id": 5,
+    "titre": "API REST pour IA Gemini",
+    "description": "API REST utilisant la clé d'API de Google pour intégrer gratuitement l'IA Gemini dans des applications, permettant d'exploiter les capacités de traitement du langage naturel de Google.",
+    "tags": ["API REST", "Google AI", "Gemini", "Backend", "Intelligence Artificielle"],
+    "lien": "https://github.com/DIMS667/IA_GEMINI_BACKEND",
+    "featured": true,
+    "image": ""
+  },
+  {
+    "id": 6,
+    "titre": "PublicPay - API de paiement avec QR Code",
+    "description": "API REST permettant de créer des services avec génération de QR codes et intégration des API de paiement MTN et CAMPAY en mode sandbox pour des transactions sécurisées.",
+    "tags": ["API REST", "QR Code", "MTN Mobile Money", "CAMPAY", "Paiement", "Sandbox"],
+    "lien": "https://github.com/DIMS667/publicpay-Backend",
+    "featured": true,
+    "image": ""
+  },
   {
     "id": 1,
     "titre": "API REST Django + Interface REACT JS",

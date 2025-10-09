@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Code2, Eye, EyeOff, Palette } from "lucide-react";
+import { Menu, X, Code2, Eye, EyeOff } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 
@@ -24,17 +24,26 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Couleurs dynamiques
+  // CORRECTION: Couleurs dynamiques basées sur le thème choisi
   const bgColor = scrolled 
-    ? mode === "dark" 
-      ? "rgba(15,23,42,0.8)" 
-      : "rgba(255,255,255,0.8)"
+    ? glassEffect
+      ? mode === "dark" 
+        ? `${theme.colors.bgDark}cc` 
+        : `${theme.colors.bg}cc`
+      : mode === "dark"
+      ? `${theme.colors.bgDark}ee`
+      : `${theme.colors.bg}ee`
     : "transparent";
   
   const textColor = mode === "dark" ? theme.colors.textDark : theme.colors.text;
-  const mobileBg = mode === "dark" 
-    ? "rgba(15,23,42,0.95)" 
-    : "rgba(255,255,255,0.95)";
+  
+  const mobileBg = glassEffect
+    ? mode === "dark" 
+      ? `${theme.colors.bgDark}f0` 
+      : `${theme.colors.bg}f0`
+    : mode === "dark"
+    ? `${theme.colors.bgDark}f5`
+    : `${theme.colors.bg}f5`;
 
   // Si showcase mode, afficher seulement le bouton de retour
   if (showcaseMode) {
@@ -46,13 +55,15 @@ export default function Header() {
         className="fixed right-6 top-6 z-50 flex items-center gap-2 rounded-full px-5 py-3 font-semibold shadow-2xl transition-all hover:scale-105"
         style={{
           background: glassEffect
-            ? "rgba(255,255,255,0.1)"
+            ? mode === "dark"
+              ? "rgba(255,255,255,0.1)"
+              : "rgba(255,255,255,0.8)"
             : mode === "dark"
-            ? "rgba(255,255,255,0.08)"
-            : "rgba(255,255,255,0.9)",
+            ? theme.colors.bgDark
+            : theme.colors.bg,
           backdropFilter: glassEffect ? "blur(12px)" : "none",
           color: theme.colors.primary,
-          border: `1px solid ${mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`
+          border: `2px solid ${theme.colors.primary}40`
         }}
       >
         <Eye className="h-5 w-5" />
@@ -69,9 +80,9 @@ export default function Header() {
       className="fixed inset-x-0 top-0 z-50 transition-all duration-300"
       style={{
         background: bgColor,
-        backdropFilter: scrolled ? "blur(16px)" : "none",
-        boxShadow: scrolled ? `0 4px 24px ${mode === "dark" ? "rgba(0,0,0,0.3)" : "rgba(0,0,0,0.1)"}` : "none",
-        borderBottom: scrolled ? `1px solid ${mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}` : "none"
+        backdropFilter: scrolled && glassEffect ? "blur(16px)" : "none",
+        boxShadow: scrolled ? `0 4px 24px ${theme.colors.primary}20` : "none",
+        borderBottom: scrolled ? `1px solid ${theme.colors.primary}30` : "none"
       }}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
@@ -89,10 +100,10 @@ export default function Header() {
           >
             <Code2 className="h-7 w-7" />
           </motion.div>
-          <span className="hidden bg-gradient-to-r bg-clip-text text-transparent sm:inline"
-            style={{
-              backgroundImage: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`
-            }}
+          {/* CORRECTION: Texte visible avec couleur solide */}
+          <span 
+            className="hidden sm:inline"
+            style={{ color: theme.colors.primary }}
           >
             Mon Portfolio
           </span>
@@ -110,12 +121,12 @@ export default function Header() {
               >
                 <a
                   href={link.href}
-                  className="relative group transition-colors"
+                  className="relative group transition-colors hover:opacity-80"
                   style={{ color: textColor }}
                 >
                   {link.label}
-                  {/* Underline animation */}
-                  <motion.span
+                  {/* Underline animation avec couleur du thème */}
+                  <span
                     className="absolute bottom-0 left-0 h-0.5 w-0 group-hover:w-full transition-all duration-300"
                     style={{ background: theme.colors.primary }}
                   />
@@ -142,7 +153,7 @@ export default function Header() {
         {/* Mobile menu button */}
         <button
           onClick={() => setOpen(!open)}
-          className="flex items-center md:hidden"
+          className="flex items-center md:hidden transition-colors"
           aria-label="Toggle navigation"
           style={{ color: textColor }}
         >
@@ -161,8 +172,8 @@ export default function Header() {
             className="overflow-hidden md:hidden"
             style={{
               background: mobileBg,
-              backdropFilter: "blur(16px)",
-              borderBottom: `1px solid ${mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`
+              backdropFilter: glassEffect ? "blur(16px)" : "none",
+              borderBottom: `1px solid ${theme.colors.primary}30`
             }}
           >
             <ul className="flex flex-col items-center gap-6 py-8 text-base font-semibold">
@@ -176,7 +187,7 @@ export default function Header() {
                 >
                   <a
                     href={link.href}
-                    className="transition-colors hover:scale-110"
+                    className="transition-all hover:scale-110"
                     style={{ color: textColor }}
                   >
                     {link.label}

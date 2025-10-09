@@ -13,7 +13,10 @@ export function ThemeProvider({ children }) {
 
   const [font, setFont] = useState(() => {
     const saved = localStorage.getItem("portfolio-font");
-    return saved ? JSON.parse(saved) : fontsConfig.fonts[0];
+    if (saved) return JSON.parse(saved);
+    // Police Retro par défaut
+    const retroFont = fontsConfig.fonts.find(f => f.id === "retro");
+    return retroFont || fontsConfig.fonts[0];
   });
 
   const [background, setBackground] = useState(() => {
@@ -23,12 +26,13 @@ export function ThemeProvider({ children }) {
 
   const [mode, setMode] = useState(() => {
     const saved = localStorage.getItem("portfolio-mode");
-    return saved || "light";
+    // Mode sombre par défaut
+    return saved || "dark";
   });
 
   const [glassEffect, setGlassEffect] = useState(() => {
     const saved = localStorage.getItem("portfolio-glass");
-    return saved === "true" || saved === null; // true par défaut
+    return saved === "true" || saved === null;
   });
 
   // Sauvegarder dans localStorage
@@ -40,7 +44,7 @@ export function ThemeProvider({ children }) {
     localStorage.setItem("portfolio-glass", glassEffect);
   }, [colorPalette, font, background, mode, glassEffect]);
 
-  // Appliquer le thème au DOM
+  // Appliquer le thème au DOM (variables CSS uniquement)
   useEffect(() => {
     const root = document.documentElement;
     const colors = mode === "dark" ? {
@@ -59,6 +63,9 @@ export function ThemeProvider({ children }) {
     root.style.setProperty("--font-heading", font.heading);
     root.style.setProperty("--font-body", font.body);
     root.style.setProperty("--glass-effect", glassEffect ? "1" : "0");
+    
+    // Appliquer aussi la couleur de fond au body pour le mode
+    document.body.style.backgroundColor = colors.bg;
   }, [colorPalette, font, mode, glassEffect]);
 
   // Charger la police dynamiquement
@@ -77,14 +84,15 @@ export function ThemeProvider({ children }) {
 
   const resetTheme = () => {
     setColorPalette(colorsConfig.palettes[0]);
-    setFont(fontsConfig.fonts[0]);
+    const retroFont = fontsConfig.fonts.find(f => f.id === "retro");
+    setFont(retroFont || fontsConfig.fonts[0]);
     setBackground("mesh");
-    setMode("light");
+    setMode("dark");
     setGlassEffect(true);
   };
 
   const value = {
-    theme: colorPalette, // Alias pour compatibilité
+    theme: colorPalette,
     colorPalette,
     setColorPalette,
     font,

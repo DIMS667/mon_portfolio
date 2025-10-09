@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { BadgeCheck, ExternalLink, Award, Filter } from "lucide-react";
+import { BadgeCheck, ExternalLink, Award } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import certificationsData from "../data/certifications.json";
-
-const categories = ["Tous", "Frontend", "Backend", "Autres"];
 
 const cardVariants = {
   hidden: { opacity: 0, scale: 0.8, rotateY: -20 },
@@ -18,23 +16,14 @@ const cardVariants = {
 
 export default function Certifications() {
   const { theme, mode, glassEffect } = useTheme();
-  const [filtre, setFiltre] = useState("Tous");
-
-  const certificationsFiltrees =
-    filtre === "Tous"
-      ? certificationsData
-      : certificationsData.filter((c) => c.categorie === filtre);
 
   return (
     <section
       id="certifications"
       className="relative isolate overflow-hidden px-6 py-24"
-      style={{
-        background: mode === "dark"
-          ? `radial-gradient(circle at bottom left, ${theme.colors.bg} 0%, ${theme.colors.bgDark} 100%)`
-          : `radial-gradient(circle at bottom left, ${theme.colors.bg} 0%, white 100%)`
-      }}
     >
+      {/* CORRECTION: Suppression du background qui cachait le fond d'écran */}
+
       {/* Décor animé */}
       <motion.div
         animate={{ scale: [1, 1.3, 1], x: [0, 30, 0] }}
@@ -54,13 +43,11 @@ export default function Certifications() {
         >
           <div className="mb-4 flex items-center justify-center gap-3">
             <Award className="h-8 w-8" style={{ color: theme.colors.primary }} />
+            {/* CORRECTION: Titre avec couleur solide */}
             <h2
               className="text-4xl font-extrabold md:text-5xl"
               style={{
-                background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text"
+                color: mode === "dark" ? theme.colors.textDark : theme.colors.text
               }}
             >
               Certifications
@@ -74,38 +61,9 @@ export default function Certifications() {
           </p>
         </motion.div>
 
-        {/* Filtres */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mb-12 flex flex-wrap items-center justify-center gap-3"
-        >
-          <Filter className="h-5 w-5" style={{ color: theme.colors.primary }} />
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setFiltre(cat)}
-              className="rounded-full px-6 py-2 text-sm font-semibold transition-all"
-              style={{
-                background: filtre === cat
-                  ? `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`
-                  : glassEffect
-                  ? "rgba(255,255,255,0.1)"
-                  : mode === "dark" ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)",
-                color: filtre === cat ? "white" : theme.colors.primary,
-                backdropFilter: glassEffect && filtre !== cat ? "blur(10px)" : "none",
-                border: filtre === cat ? "none" : `1px solid ${theme.colors.primary}30`
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </motion.div>
-
         {/* Grille */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {certificationsFiltrees.map((cert, i) => (
+          {certificationsData.map((cert, i) => (
             <motion.div
               key={cert.id}
               custom={i}
@@ -207,22 +165,6 @@ export default function Certifications() {
             </motion.div>
           ))}
         </div>
-
-        {/* Message si aucune certification */}
-        {certificationsFiltrees.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="py-20 text-center"
-          >
-            <p
-              className="text-lg"
-              style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
-            >
-              Aucune certification trouvée pour ce filtre
-            </p>
-          </motion.div>
-        )}
       </div>
     </section>
   );

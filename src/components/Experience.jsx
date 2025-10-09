@@ -12,7 +12,7 @@ const cardVariants = {
   })
 };
 
-function TimelineDot({ isActive }) {
+function TimelineDot({ isActive, isLeft }) {
   const { theme } = useTheme();
   
   return (
@@ -38,12 +38,9 @@ export default function Experience() {
     <section
       id="experience"
       className="relative isolate overflow-hidden px-6 py-24"
-      style={{
-        background: mode === "dark"
-          ? `linear-gradient(180deg, ${theme.colors.bgDark} 0%, ${theme.colors.bg} 100%)`
-          : `linear-gradient(180deg, white 0%, ${theme.colors.bg} 100%)`
-      }}
     >
+      {/* CORRECTION: Suppression du background qui cachait le fond d'écran */}
+
       {/* Décor */}
       <motion.div
         animate={{ rotate: 360, scale: [1, 1.2, 1] }}
@@ -63,13 +60,11 @@ export default function Experience() {
         >
           <div className="mb-4 flex items-center justify-center gap-3">
             <Briefcase className="h-8 w-8" style={{ color: theme.colors.primary }} />
+            {/* CORRECTION: Titre avec couleur solide */}
             <h2
               className="text-4xl font-extrabold md:text-5xl"
               style={{
-                background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text"
+                color: mode === "dark" ? theme.colors.textDark : theme.colors.text
               }}
             >
               Expérience Professionnelle
@@ -85,9 +80,9 @@ export default function Experience() {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Ligne verticale */}
+          {/* Ligne verticale centrée */}
           <div
-            className="absolute left-8 top-0 hidden h-full w-0.5 md:block"
+            className="absolute left-1/2 top-0 hidden h-full w-0.5 md:block -translate-x-1/2"
             style={{
               background: `linear-gradient(to bottom, ${theme.colors.primary}00, ${theme.colors.primary}, ${theme.colors.primary}00)`
             }}
@@ -95,118 +90,123 @@ export default function Experience() {
 
           {/* Expériences */}
           <div className="space-y-12">
-            {experiencesData.map((exp, i) => (
-              <motion.div
-                key={exp.id}
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                className="relative md:ml-20"
-              >
-                {/* Dot sur la timeline */}
-                <div className="absolute -left-[4.75rem] top-8 hidden md:block">
-                  <TimelineDot isActive={exp.actuel} />
-                </div>
-
-                {/* Carte */}
+            {experiencesData.map((exp, i) => {
+              // Détermine si l'élément doit être à gauche ou à droite
+              const isLeft = i % 2 === 0;
+              
+              return (
                 <motion.div
-                  whileHover={{ scale: 1.02, x: 10 }}
-                  className="group relative overflow-hidden rounded-3xl p-8 shadow-xl"
-                  style={{
-                    background: glassEffect
-                      ? "rgba(255,255,255,0.1)"
-                      : mode === "dark"
-                      ? "rgba(255,255,255,0.05)"
-                      : "white",
-                    backdropFilter: glassEffect ? "blur(20px)" : "none",
-                    border: `2px solid ${exp.actuel ? theme.colors.primary : mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`
-                  }}
+                  key={exp.id}
+                  custom={i}
+                  variants={cardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  className={`relative md:flex ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}
                 >
-                  {/* Badge "En cours" */}
-                  {exp.actuel && (
-                    <div
-                      className="absolute right-4 top-4 rounded-full px-3 py-1 text-xs font-bold"
-                      style={{
-                        background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`,
-                        color: "white"
-                      }}
-                    >
-                      En cours
-                    </div>
-                  )}
+                  {/* Dot sur la timeline */}
+                  <div className="absolute left-1/2 top-8 hidden md:block -translate-x-1/2">
+                    <TimelineDot isActive={exp.actuel} isLeft={isLeft} />
+                  </div>
 
-                  {/* Glow effect */}
-                  <div
-                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  {/* Carte */}
+                  <motion.div
+                    whileHover={{ scale: 1.02, x: isLeft ? -10 : 10 }}
+                    className="group relative overflow-hidden rounded-3xl p-8 shadow-xl md:w-5/12"
                     style={{
-                      background: `radial-gradient(circle at top left, ${theme.colors.primary}15, transparent)`
+                      background: glassEffect
+                        ? "rgba(255,255,255,0.1)"
+                        : mode === "dark"
+                        ? "rgba(255,255,255,0.05)"
+                        : "white",
+                      backdropFilter: glassEffect ? "blur(20px)" : "none",
+                      border: `2px solid ${exp.actuel ? theme.colors.primary : mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`
                     }}
-                  />
-
-                  <div className="relative z-10">
-                    {/* Header */}
-                    <div className="mb-4 flex items-start gap-4">
-                      {/* Icône entreprise */}
+                  >
+                    {/* Badge "En cours" */}
+                    {exp.actuel && (
                       <div
-                        className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl"
+                        className="absolute right-4 top-4 rounded-full px-3 py-1 text-xs font-bold"
                         style={{
-                          background: `linear-gradient(135deg, ${theme.colors.primary}20, ${theme.colors.secondary}20)`
+                          background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`,
+                          color: "white"
                         }}
                       >
-                        <Building2 className="h-7 w-7" style={{ color: theme.colors.primary }} />
+                        En cours
+                      </div>
+                    )}
+
+                    {/* Glow effect */}
+                    <div
+                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                      style={{
+                        background: `radial-gradient(circle at top left, ${theme.colors.primary}15, transparent)`
+                      }}
+                    />
+
+                    <div className="relative z-10">
+                      {/* Header */}
+                      <div className="mb-4 flex items-start gap-4">
+                        {/* Icône entreprise */}
+                        <div
+                          className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl"
+                          style={{
+                            background: `linear-gradient(135deg, ${theme.colors.primary}20, ${theme.colors.secondary}20)`
+                          }}
+                        >
+                          <Building2 className="h-7 w-7" style={{ color: theme.colors.primary }} />
+                        </div>
+
+                        <div className="flex-1">
+                          <h3
+                            className="mb-1 text-2xl font-bold"
+                            style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
+                          >
+                            {exp.titre}
+                          </h3>
+                          <p
+                            className="text-lg font-semibold"
+                            style={{ color: theme.colors.primary }}
+                          >
+                            {exp.entreprise}
+                          </p>
+                        </div>
                       </div>
 
-                      <div className="flex-1">
-                        <h3
-                          className="mb-1 text-2xl font-bold"
+                      {/* Infos */}
+                      <div className="mb-4 flex flex-wrap gap-4 text-sm">
+                        <div
+                          className="flex items-center gap-2"
                           style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
                         >
-                          {exp.titre}
-                        </h3>
-                        <p
-                          className="text-lg font-semibold"
-                          style={{ color: theme.colors.primary }}
+                          <Calendar className="h-4 w-4" style={{ color: theme.colors.primary }} />
+                          {exp.periode}
+                        </div>
+                        <div
+                          className="flex items-center gap-2"
+                          style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
                         >
-                          {exp.entreprise}
-                        </p>
+                          <MapPin className="h-4 w-4" style={{ color: theme.colors.primary }} />
+                          {exp.lieu}
+                        </div>
                       </div>
-                    </div>
 
-                    {/* Infos */}
-                    <div className="mb-4 flex flex-wrap gap-4 text-sm">
-                      <div
-                        className="flex items-center gap-2"
-                        style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
+                      {/* Description */}
+                      <p
+                        className="leading-relaxed"
+                        style={{ 
+                          color: mode === "dark" 
+                            ? `${theme.colors.textDark}dd` 
+                            : `${theme.colors.text}dd`
+                        }}
                       >
-                        <Calendar className="h-4 w-4" style={{ color: theme.colors.primary }} />
-                        {exp.periode}
-                      </div>
-                      <div
-                        className="flex items-center gap-2"
-                        style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
-                      >
-                        <MapPin className="h-4 w-4" style={{ color: theme.colors.primary }} />
-                        {exp.lieu}
-                      </div>
+                        {exp.description}
+                      </p>
                     </div>
-
-                    {/* Description */}
-                    <p
-                      className="leading-relaxed"
-                      style={{ 
-                        color: mode === "dark" 
-                          ? `${theme.colors.textDark}dd` 
-                          : `${theme.colors.text}dd`
-                      }}
-                    >
-                      {exp.description}
-                    </p>
-                  </div>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
