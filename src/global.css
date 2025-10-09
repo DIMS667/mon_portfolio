@@ -32,7 +32,6 @@
     scroll-behavior: smooth;
   }
 
-  /* Le body a juste une couleur de base, les animations sont gérées par React */
   body {
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
@@ -57,7 +56,6 @@
     @apply pt-32;
   }
 
-  /* Contenu des sections au-dessus */
   section > * {
     position: relative;
     z-index: 1;
@@ -152,6 +150,12 @@
   66% { transform: translate(-20px, 20px) scale(0.9); }
 }
 
+/* Animation pour le curseur de typing */
+@keyframes blink-cursor {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
@@ -163,6 +167,10 @@
 
 .animate-blob {
   animation: blob 8s ease-in-out infinite;
+}
+
+.animate-blink-cursor {
+  animation: blink-cursor 1s step-end infinite;
 }
 
 /* ========================================

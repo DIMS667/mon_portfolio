@@ -6,29 +6,40 @@ import themesConfig from "../config/themes.json";
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [colorPalette, setColorPalette] = useState(() => {
+  // CONFIGURATION PAR DÉFAUT: Midnight Purple
+  const getDefaultColorPalette = () => {
     const saved = localStorage.getItem("portfolio-color");
-    return saved ? JSON.parse(saved) : colorsConfig.palettes[0];
-  });
+    if (saved) return JSON.parse(saved);
+    // Trouver Midnight Purple dans la config
+    const midnightPurple = colorsConfig.palettes.find(p => p.id === "midnight");
+    return midnightPurple || colorsConfig.palettes[0];
+  };
 
-  const [font, setFont] = useState(() => {
+  // CONFIGURATION PAR DÉFAUT: Police Retro
+  const getDefaultFont = () => {
     const saved = localStorage.getItem("portfolio-font");
     if (saved) return JSON.parse(saved);
-    // Police Retro par défaut
+    // Trouver la police Retro
     const retroFont = fontsConfig.fonts.find(f => f.id === "retro");
     return retroFont || fontsConfig.fonts[0];
-  });
+  };
 
-  const [background, setBackground] = useState(() => {
+  // CONFIGURATION PAR DÉFAUT: Grille Cyber
+  const getDefaultBackground = () => {
     const saved = localStorage.getItem("portfolio-background");
-    return saved || "mesh";
-  });
+    return saved || "grid"; // "grid" = Grille Cyber
+  };
 
-  const [mode, setMode] = useState(() => {
+  // CONFIGURATION PAR DÉFAUT: Mode Sombre
+  const getDefaultMode = () => {
     const saved = localStorage.getItem("portfolio-mode");
-    // Mode sombre par défaut
     return saved || "dark";
-  });
+  };
+
+  const [colorPalette, setColorPalette] = useState(getDefaultColorPalette);
+  const [font, setFont] = useState(getDefaultFont);
+  const [background, setBackground] = useState(getDefaultBackground);
+  const [mode, setMode] = useState(getDefaultMode);
 
   const [glassEffect, setGlassEffect] = useState(() => {
     const saved = localStorage.getItem("portfolio-glass");
@@ -64,7 +75,7 @@ export function ThemeProvider({ children }) {
     root.style.setProperty("--font-body", font.body);
     root.style.setProperty("--glass-effect", glassEffect ? "1" : "0");
     
-    // Appliquer aussi la couleur de fond au body pour le mode
+    // Appliquer la couleur de fond au body
     document.body.style.backgroundColor = colors.bg;
   }, [colorPalette, font, mode, glassEffect]);
 
@@ -83,10 +94,13 @@ export function ThemeProvider({ children }) {
   }, [font]);
 
   const resetTheme = () => {
-    setColorPalette(colorsConfig.palettes[0]);
+    // Réinitialiser avec le thème Cyber par défaut
+    const midnightPurple = colorsConfig.palettes.find(p => p.id === "midnight");
     const retroFont = fontsConfig.fonts.find(f => f.id === "retro");
+    
+    setColorPalette(midnightPurple || colorsConfig.palettes[0]);
     setFont(retroFont || fontsConfig.fonts[0]);
-    setBackground("mesh");
+    setBackground("grid");
     setMode("dark");
     setGlassEffect(true);
   };

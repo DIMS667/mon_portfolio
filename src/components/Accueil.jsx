@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Download, ChevronDown, Sparkles, Code2, Zap, Star, Rocket } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+import { TypingAnimation } from "./TypingAnimation";
 import photo from "../assets/photo.jpg";
 import profileData from "../data/profile.json";
 
@@ -23,7 +24,6 @@ const fadeUp = {
 export default function Accueil() {
   const { theme, mode, glassEffect } = useTheme();
 
-  // Couleurs dynamiques selon le mode
   const textColor = mode === "dark" ? theme.colors.textDark : theme.colors.text;
   const cardBg = mode === "dark" 
     ? glassEffect ? "rgba(255,255,255,0.05)" : "rgba(255,255,255,0.08)"
@@ -34,33 +34,21 @@ export default function Accueil() {
       id="accueil"
       className="relative isolate flex min-h-screen items-center justify-center overflow-hidden px-6 py-32"
     >
-      {/* CORRECTION: Suppression du style background pour utiliser le fond global */}
-
       {/* Background animé */}
       <div className="pointer-events-none absolute inset-0">
-        {/* Blobs animés */}
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            y: [0, -30, 0]
-          }}
+          animate={{ scale: [1, 1.2, 1], x: [0, 50, 0], y: [0, -30, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
           className="absolute -left-32 top-20 h-96 w-96 rounded-full opacity-20 blur-3xl"
           style={{ background: theme.colors.primary }}
         />
         <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            x: [0, -50, 0],
-            y: [0, 30, 0]
-          }}
+          animate={{ scale: [1, 1.3, 1], x: [0, -50, 0], y: [0, 30, 0] }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
           className="absolute -right-32 bottom-20 h-[32rem] w-[32rem] rounded-full opacity-20 blur-3xl"
           style={{ background: theme.colors.secondary }}
         />
 
-        {/* Particules flottantes */}
         {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
@@ -110,12 +98,8 @@ export default function Accueil() {
           {profileData.status}
         </motion.div>
 
-        {/* Portrait avec animation 3D */}
-        <motion.div
-          variants={fadeUp}
-          className="relative mx-auto mb-10 inline-block"
-        >
-          {/* Glow effect autour de la photo */}
+        {/* Portrait */}
+        <motion.div variants={fadeUp} className="relative mx-auto mb-10 inline-block">
           <div
             className="absolute -inset-4 rounded-full opacity-50 blur-2xl"
             style={{
@@ -123,10 +107,7 @@ export default function Accueil() {
             }}
           />
           
-          <motion.div
-            whileHover={{ scale: 1.05, rotate: 2 }}
-            className="relative h-44 w-44 md:h-52 md:w-52"
-          >
+          <motion.div whileHover={{ scale: 1.05, rotate: 2 }} className="relative h-44 w-44 md:h-52 md:w-52">
             <img
               src={photo}
               alt={profileData.nom_complet}
@@ -136,7 +117,6 @@ export default function Accueil() {
               }}
             />
             
-            {/* Icônes orbitales */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -144,24 +124,15 @@ export default function Accueil() {
             >
               <Code2
                 className="absolute -right-3 top-8 h-7 w-7 rounded-full p-1.5 shadow-lg"
-                style={{ 
-                  background: theme.colors.primary,
-                  color: "white"
-                }}
+                style={{ background: theme.colors.primary, color: "white" }}
               />
               <Zap
                 className="absolute -left-3 bottom-8 h-7 w-7 rounded-full p-1.5 shadow-lg"
-                style={{ 
-                  background: theme.colors.secondary,
-                  color: "white"
-                }}
+                style={{ background: theme.colors.secondary, color: "white" }}
               />
               <Rocket
                 className="absolute right-8 -bottom-2 h-7 w-7 rounded-full p-1.5 shadow-lg"
-                style={{ 
-                  background: theme.colors.accent,
-                  color: "white"
-                }}
+                style={{ background: theme.colors.accent, color: "white" }}
               />
             </motion.div>
           </motion.div>
@@ -169,34 +140,35 @@ export default function Accueil() {
 
         {/* Salutation */}
         <motion.div variants={fadeUp} className="mb-4">
-          <span
-            className="text-xl font-medium md:text-2xl"
-            style={{ color: textColor }}
-          >
+          <span className="text-xl font-medium md:text-2xl" style={{ color: textColor }}>
             👋 Bonjour, je suis
           </span>
         </motion.div>
 
-        {/* Nom - CORRECTION: Couleur solide visible */}
-        <motion.h1
-          variants={fadeUp}
-          className="mb-6 text-5xl font-extrabold leading-tight tracking-tight md:text-6xl lg:text-7xl"
-          style={{
-            color: mode === "dark" ? theme.colors.textDark : theme.colors.text,
-            textShadow: `0 0 40px ${theme.colors.primary}40`
-          }}
-        >
-          {profileData.nom_complet}
-        </motion.h1>
+        {/* Nom avec animation typing */}
+        <motion.div variants={fadeUp} className="mb-6">
+          <TypingAnimation
+            className="text-5xl font-extrabold leading-tight tracking-tight md:text-6xl lg:text-7xl"
+            style={{
+              color: theme.colors.primary,
+              textShadow: `0 2px 20px ${theme.colors.primary}60, 0 0 60px ${theme.colors.secondary}30`
+            }}
+            duration={150}
+            showCursor={true}
+            blinkCursor={true}
+          >
+            {profileData.nom_complet}
+          </TypingAnimation>
+        </motion.div>
 
-        {/* Titre avec effet typing */}
-        <motion.div
-          variants={fadeUp}
-          className="mb-4"
-        >
+        {/* Titre professionnel */}
+        <motion.div variants={fadeUp} className="mb-4">
           <p
             className="text-2xl font-bold uppercase tracking-wider md:text-3xl"
-            style={{ color: theme.colors.primary }}
+            style={{ 
+              color: mode === "dark" ? theme.colors.textDark : theme.colors.text,
+              textShadow: `0 0 20px ${theme.colors.primary}40`
+            }}
           >
             {profileData.titre}
           </p>
