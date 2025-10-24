@@ -1,9 +1,27 @@
 [
   {
+    "id": 7,
+    "titre": "Score IA - Backend Scoring Bancaire",
+    "description": "Intelligence artificielle de prédiction de la fiabilité des prêts bancaires. API backend développée pour analyser les données financières et calculer un score de risque de crédit basé sur des algorithmes de machine learning.",
+    "tags": ["Intelligence Artificielle", "Machine Learning", "API REST"],
+    "lien": "https://github.com/DIMS667/Backend_scoring_ia",
+    "featured": true,
+    "image": ""
+  },
+  {
+    "id": 8,
+    "titre": "Score IA - Frontend Template",
+    "description": "Interface utilisateur moderne pour le système Score IA. Template frontend permettant de visualiser les analyses de crédit, afficher les scores de fiabilité et gérer les demandes de prêt avec une expérience utilisateur intuitive.",
+    "tags": ["React JS","Intelligence Artificielle"],
+    "lien": "https://github.com/DIMS667/frontend-score-ia",
+    "featured": true,
+    "image": ""
+  },
+  {
     "id": 4,
     "titre": "Template d'IA avec React.js",
     "description": "Template d'intelligence artificielle développé avec React.js, offrant une interface moderne et réactive pour intégrer des fonctionnalités d'IA dans des applications web.",
-    "tags": ["React JS", "Intelligence Artificielle", "Template", "Frontend"],
+    "tags": ["React JS", "Intelligence Artificielle"],
     "lien": "https://github.com/DIMS667/complexity",
     "featured": true,
     "image": ""
