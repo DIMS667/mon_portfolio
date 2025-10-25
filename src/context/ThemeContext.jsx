@@ -6,10 +6,23 @@ import themesConfig from "../config/themes.json";
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
+  // Vérifier que les configs sont chargées
+  useEffect(() => {
+    console.log("🎨 Theme Config Loaded:", {
+      colors: colorsConfig.palettes?.length || 0,
+      fonts: fontsConfig.fonts?.length || 0,
+      backgrounds: themesConfig.backgrounds?.length || 0
+    });
+  }, []);
+
   // CONFIGURATION PAR DÉFAUT: Midnight Purple
   const getDefaultColorPalette = () => {
-    const saved = localStorage.getItem("portfolio-color");
-    if (saved) return JSON.parse(saved);
+    try {
+      const saved = localStorage.getItem("portfolio-color");
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.warn("Error reading color from localStorage", e);
+    }
     // Trouver Midnight Purple dans la config
     const midnightPurple = colorsConfig.palettes.find(p => p.id === "midnight");
     return midnightPurple || colorsConfig.palettes[0];
@@ -17,8 +30,12 @@ export function ThemeProvider({ children }) {
 
   // CONFIGURATION PAR DÉFAUT: Police Retro
   const getDefaultFont = () => {
-    const saved = localStorage.getItem("portfolio-font");
-    if (saved) return JSON.parse(saved);
+    try {
+      const saved = localStorage.getItem("portfolio-font");
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.warn("Error reading font from localStorage", e);
+    }
     // Trouver la police Retro
     const retroFont = fontsConfig.fonts.find(f => f.id === "retro");
     return retroFont || fontsConfig.fonts[0];
@@ -26,20 +43,30 @@ export function ThemeProvider({ children }) {
 
   // CONFIGURATION PAR DÉFAUT: Grille Cyber
   const getDefaultBackground = () => {
-    const saved = localStorage.getItem("portfolio-background");
-    return saved || "grid"; // "grid" = Grille Cyber
+    try {
+      const saved = localStorage.getItem("portfolio-background");
+      if (saved) return saved;
+    } catch (e) {
+      console.warn("Error reading background from localStorage", e);
+    }
+    return "grid"; // "grid" = Grille Cyber
   };
 
   // CONFIGURATION PAR DÉFAUT: Mode Sombre
   const getDefaultMode = () => {
-    const saved = localStorage.getItem("portfolio-mode");
-    return saved || "dark";
+    try {
+      const saved = localStorage.getItem("portfolio-mode");
+      if (saved) return saved;
+    } catch (e) {
+      console.warn("Error reading mode from localStorage", e);
+    }
+    return "dark";
   };
 
-  const [colorPalette, setColorPalette] = useState(getDefaultColorPalette);
-  const [font, setFont] = useState(getDefaultFont);
-  const [background, setBackground] = useState(getDefaultBackground);
-  const [mode, setMode] = useState(getDefaultMode);
+  const [colorPalette, setColorPalette] = useState(() => getDefaultColorPalette());
+  const [font, setFont] = useState(() => getDefaultFont());
+  const [background, setBackground] = useState(() => getDefaultBackground());
+  const [mode, setMode] = useState(() => getDefaultMode());
 
   const [glassEffect, setGlassEffect] = useState(() => {
     const saved = localStorage.getItem("portfolio-glass");
