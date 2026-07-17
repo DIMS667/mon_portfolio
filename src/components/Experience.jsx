@@ -1,213 +1,128 @@
-import { motion } from "framer-motion";
-import { Calendar, MapPin, Briefcase, Building2 } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
+import { motion as Motion } from "framer-motion";
+import { BriefcaseBusiness, Building2, Calendar, MapPin } from "lucide-react";
+import { useTheme } from "../context/theme";
 import experiencesData from "../data/experiences.json";
-
-const cardVariants = {
-  hidden: { opacity: 0, x: -50 },
-  visible: (i) => ({
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.6, delay: i * 0.2, ease: "easeOut" }
-  })
-};
-
-function TimelineDot({ isActive, isLeft }) {
-  const { theme } = useTheme();
-  
-  return (
-    <div className="relative flex h-6 w-6 items-center justify-center">
-      {isActive && (
-        <span
-          className="absolute h-8 w-8 animate-ping rounded-full opacity-75"
-          style={{ background: theme.colors.primary }}
-        />
-      )}
-      <span
-        className="relative h-5 w-5 rounded-full ring-4 ring-white shadow-lg"
-        style={{ background: theme.colors.primary }}
-      />
-    </div>
-  );
-}
 
 export default function Experience() {
   const { theme, mode, glassEffect } = useTheme();
+  const textColor = mode === "dark" ? theme.colors.textDark : theme.colors.text;
+  const mutedColor = `${textColor}bd`;
+  const cardBackground = mode === "dark" ? "rgba(15, 23, 42, 0.7)" : "rgba(255, 255, 255, 0.82)";
 
   return (
-    <section
-      id="experience"
-      className="relative isolate overflow-hidden px-6 py-24"
-    >
-      {/* CORRECTION: Suppression du background qui cachait le fond d'écran */}
-
-      {/* Décor */}
-      <motion.div
-        animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-        transition={{ duration: 30, repeat: Infinity }}
-        className="pointer-events-none absolute -right-20 bottom-20 h-96 w-96 rounded-full opacity-10 blur-3xl"
-        style={{ background: theme.colors.accent }}
-      />
-
+    <section id="experience" className="relative isolate overflow-hidden px-4 py-20 sm:px-6 lg:py-28">
       <div className="mx-auto max-w-5xl">
-        {/* Titre */}
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
+        <Motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-20 text-center"
+          viewport={{ once: true, amount: 0.3 }}
+          className="mx-auto mb-14 max-w-3xl text-center"
         >
-          <div className="mb-4 flex items-center justify-center gap-3">
-            <Briefcase className="h-8 w-8" style={{ color: theme.colors.primary }} />
-            {/* CORRECTION: Titre avec couleur solide */}
-            <h2
-              className="text-4xl font-extrabold md:text-5xl"
-              style={{
-                color: mode === "dark" ? theme.colors.textDark : theme.colors.text
-              }}
-            >
-              Expérience Professionnelle
-            </h2>
-          </div>
-          <p
-            className="mx-auto max-w-2xl text-base md:text-lg"
-            style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
+          <span
+            className="mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-bold"
+            style={{ color: theme.colors.primary, background: `${theme.colors.primary}12` }}
           >
-            Mon parcours professionnel et les missions qui ont forgé mon expertise
+            <BriefcaseBusiness className="h-4 w-4" aria-hidden="true" />
+            Parcours professionnel
+          </span>
+          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl" style={{ color: textColor }}>
+            Expériences
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: mutedColor }}>
+            Un parcours progressif du backend au full-stack, aujourd'hui appliqué aux produits et services financiers.
           </p>
-        </motion.div>
+        </Motion.div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {/* Ligne verticale centrée */}
+        <div className="relative space-y-6 pl-8 sm:pl-12">
           <div
-            className="absolute left-1/2 top-0 hidden h-full w-0.5 md:block -translate-x-1/2"
-            style={{
-              background: `linear-gradient(to bottom, ${theme.colors.primary}00, ${theme.colors.primary}, ${theme.colors.primary}00)`
-            }}
+            className="absolute bottom-5 left-[9px] top-5 w-px sm:left-[17px]"
+            style={{ background: `linear-gradient(${theme.colors.primary}20, ${theme.colors.primary}, ${theme.colors.primary}20)` }}
+            aria-hidden="true"
           />
 
-          {/* Expériences */}
-          <div className="space-y-12">
-            {experiencesData.map((exp, i) => {
-              // Détermine si l'élément doit être à gauche ou à droite
-              const isLeft = i % 2 === 0;
-              
-              return (
-                <motion.div
-                  key={exp.id}
-                  custom={i}
-                  variants={cardVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-100px" }}
-                  className={`relative md:flex ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}
+          {experiencesData.map((experience, index) => (
+            <Motion.article
+              key={experience.id}
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, delay: Math.min(index * 0.07, 0.25) }}
+              className="relative min-w-0 rounded-3xl p-5 shadow-lg sm:p-7"
+              style={{
+                background: cardBackground,
+                backdropFilter: glassEffect ? "blur(18px)" : "none",
+                border: `1px solid ${experience.actuel ? `${theme.colors.primary}68` : `${theme.colors.primary}24`}`,
+              }}
+            >
+              <span
+                className="absolute -left-[31px] top-8 flex h-5 w-5 items-center justify-center rounded-full sm:-left-[47px]"
+                style={{ background: mode === "dark" ? theme.colors.bgDark : theme.colors.bg }}
+                aria-hidden="true"
+              >
+                {experience.actuel && (
+                  <span className="absolute h-5 w-5 animate-ping rounded-full opacity-40" style={{ background: theme.colors.primary }} />
+                )}
+                <span className="relative h-3 w-3 rounded-full" style={{ background: theme.colors.primary }} />
+              </span>
+
+              <div className="flex min-w-0 flex-col gap-5 sm:flex-row sm:items-start">
+                <span
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl"
+                  style={{ color: theme.colors.primary, background: `${theme.colors.primary}12` }}
                 >
-                  {/* Dot sur la timeline */}
-                  <div className="absolute left-1/2 top-8 hidden md:block -translate-x-1/2">
-                    <TimelineDot isActive={exp.actuel} isLeft={isLeft} />
-                  </div>
+                  <Building2 className="h-6 w-6" aria-hidden="true" />
+                </span>
 
-                  {/* Carte */}
-                  <motion.div
-                    whileHover={{ scale: 1.02, x: isLeft ? -10 : 10 }}
-                    className="group relative overflow-hidden rounded-3xl p-8 shadow-xl md:w-5/12"
-                    style={{
-                      background: glassEffect
-                        ? "rgba(255,255,255,0.1)"
-                        : mode === "dark"
-                        ? "rgba(255,255,255,0.05)"
-                        : "white",
-                      backdropFilter: glassEffect ? "blur(20px)" : "none",
-                      border: `2px solid ${exp.actuel ? theme.colors.primary : mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`
-                    }}
-                  >
-                    {/* Badge "En cours" */}
-                    {exp.actuel && (
-                      <div
-                        className="absolute right-4 top-4 rounded-full px-3 py-1 text-xs font-bold"
-                        style={{
-                          background: `linear-gradient(135deg, ${theme.colors.primary}, ${theme.colors.secondary})`,
-                          color: "white"
-                        }}
-                      >
-                        En cours
-                      </div>
-                    )}
-
-                    {/* Glow effect */}
-                    <div
-                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                      style={{
-                        background: `radial-gradient(circle at top left, ${theme.colors.primary}15, transparent)`
-                      }}
-                    />
-
-                    <div className="relative z-10">
-                      {/* Header */}
-                      <div className="mb-4 flex items-start gap-4">
-                        {/* Icône entreprise */}
-                        <div
-                          className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl"
-                          style={{
-                            background: `linear-gradient(135deg, ${theme.colors.primary}20, ${theme.colors.secondary}20)`
-                          }}
-                        >
-                          <Building2 className="h-7 w-7" style={{ color: theme.colors.primary }} />
-                        </div>
-
-                        <div className="flex-1">
-                          <h3
-                            className="mb-1 text-2xl font-bold"
-                            style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
-                          >
-                            {exp.titre}
-                          </h3>
-                          <p
-                            className="text-lg font-semibold"
-                            style={{ color: theme.colors.primary }}
-                          >
-                            {exp.entreprise}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Infos */}
-                      <div className="mb-4 flex flex-wrap gap-4 text-sm">
-                        <div
-                          className="flex items-center gap-2"
-                          style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
-                        >
-                          <Calendar className="h-4 w-4" style={{ color: theme.colors.primary }} />
-                          {exp.periode}
-                        </div>
-                        <div
-                          className="flex items-center gap-2"
-                          style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
-                        >
-                          <MapPin className="h-4 w-4" style={{ color: theme.colors.primary }} />
-                          {exp.lieu}
-                        </div>
-                      </div>
-
-                      {/* Description */}
-                      <p
-                        className="leading-relaxed"
-                        style={{ 
-                          color: mode === "dark" 
-                            ? `${theme.colors.textDark}dd` 
-                            : `${theme.colors.text}dd`
-                        }}
-                      >
-                        {exp.description}
+                <div className="min-w-0 flex-1">
+                  <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="min-w-0">
+                      <h3 className="text-xl font-extrabold sm:text-2xl" style={{ color: textColor }}>
+                        {experience.titre}
+                      </h3>
+                      <p className="mt-1 text-base font-bold" style={{ color: theme.colors.primary }}>
+                        {experience.entreprise}
                       </p>
                     </div>
-                  </motion.div>
-                </motion.div>
-              );
-            })}
-          </div>
+                    {experience.actuel && (
+                      <span
+                        className="w-fit shrink-0 rounded-full px-3 py-1 text-xs font-extrabold"
+                        style={{ color: theme.colors.onPrimary, background: theme.colors.primary }}
+                      >
+                        Poste actuel
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="mt-4 flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-5" style={{ color: mutedColor }}>
+                    <span className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4 shrink-0" style={{ color: theme.colors.primary }} aria-hidden="true" />
+                      {experience.periode}
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <MapPin className="h-4 w-4 shrink-0" style={{ color: theme.colors.primary }} aria-hidden="true" />
+                      {experience.lieu}
+                    </span>
+                  </div>
+
+                  <p className="mt-4 leading-relaxed" style={{ color: mutedColor }}>
+                    {experience.description}
+                  </p>
+
+                  <ul className="mt-4 flex flex-wrap gap-2" aria-label={`Technologies utilisées chez ${experience.entreprise}`}>
+                    {experience.technologies.map((technology) => (
+                      <li
+                        key={technology}
+                        className="rounded-lg px-2.5 py-1 text-xs font-bold"
+                        style={{ color: textColor, background: `${theme.colors.primary}0e` }}
+                      >
+                        {technology}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </Motion.article>
+          ))}
         </div>
       </div>
     </section>

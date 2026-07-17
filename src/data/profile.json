@@ -2,24 +2,22 @@
   "nom": "Tonye Nwalal Jules Dimitri",
   "prenom": "Jules Dimitri",
   "nom_complet": "Tonye Nwalal Jules Dimitri",
-  "titre": "Développeur Full‑stack Web",
-  "specialites": ["Django", "React.js", "API REST"],
-  "bio": "Passionné par la création d'expériences web fluides et performantes, j'allie le meilleur de Django et React pour bâtir des produits robustes, scalables et centrés sur l'utilisateur.",
+  "nom_affiche": "Jules Dimitri",
+  "titre": "Ingénieur en systèmes d'information & développeur full-stack",
+  "accroche": "Je transforme des besoins métier en produits web et mobile fiables, performants et simples à utiliser.",
+  "specialites": ["Django & FastAPI", "React.js & Flutter", "API & paiements"],
+  "bio": "Développeur full-stack polyvalent, je travaille avec Python, Laravel et les technologies frontend modernes. J'interviens de la conception à la mise en production avec une approche pragmatique, collaborative et orientée résultats.",
   "photo": "/assets/photo.jpg",
   "cv": "/CV_TONYE NWALAL_JULES DIMITRI.pdf",
-  "annees_experience": 1,
+  "annees_experience": 2,
   "projets_realises": 25,
-  "technologies_maitrisees": 5,
+  "technologies_maitrisees": 12,
   "status": "Ouvert aux opportunités",
+  "localisation": "Douala & Yaoundé, Cameroun",
+  "formation_principale": "Master 2 — Systèmes d'information et génie logiciel",
   "langues": [
-    { "langue": "Français", "niveau": "Natif" },
-    { "langue": "Anglais", "niveau": "Intermédiaire" }
+    { "langue": "Français", "niveau": "Courant" },
+    { "langue": "Anglais", "niveau": "Professionnel" }
   ],
-  "interets": [
-    "Intelligence Artificielle",
-    "Cloud Computing",
-    "Architecture Logicielle",
-    "UI/UX Design",
-    "Open Source"
-  ]
+  "interets": ["Football", "Lecture", "Intelligence artificielle", "Architecture logicielle", "Open source"]
 }

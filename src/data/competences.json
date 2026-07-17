@@ -1,40 +1,63 @@
 [
   {
-    "categorie": "Frontend",
+    "categorie": "Frontend & mobile",
     "elements": [
       {
-        "titre": "Connaissance en technologie frontend (React.js)",
-        "description": "Je maîtrise l'intégration d'une API dans un frontend.",
+        "titre": "Interfaces web modernes",
+        "description": "Architecture par composants, gestion d'état, optimisation du rendu et création d'interfaces accessibles et responsive.",
         "icon": "LayoutPanelTop",
-        "niveau": 85
-      }
-    ]
-  },
-  {
-    "categorie": "Backend",
-    "elements": [
-      {
-        "titre": "Connaissance des technologies backend",
-        "description": "Je maîtrise le framework Django avec son modèle MVT pour la création d'applications web, mais je travaille aussi avec Laravel et son modèle MVC.",
-        "icon": "Code",
-        "niveau": 90
+        "technologies": ["React.js", "Tailwind CSS", "Redux", "Zustand"]
       },
       {
-        "titre": "Création et gestion des API (REST)",
-        "description": "Je suis capable de concevoir des API robustes et sécurisées.",
-        "icon": "Server",
-        "niveau": 88
+        "titre": "Applications multiplateformes",
+        "description": "Conception d'expériences mobiles cohérentes avec les services web et les API métier.",
+        "icon": "Smartphone",
+        "technologies": ["Flutter", "Dart", "API REST"]
       }
     ]
   },
   {
-    "categorie": "Bases de données",
+    "categorie": "Backend & API",
     "elements": [
       {
-        "titre": "Gestion des bases de données (SQL / NoSQL)",
-        "description": "Je travaille avec des bases relationnelles (MySQL, PostgreSQL) et non relationnelles (MongoDB, Firebase), en structurant et interrogeant les données efficacement.",
+        "titre": "Écosystème Python",
+        "description": "Conception de backends structurés, authentification, ORM, middleware, tests et optimisation des requêtes.",
+        "icon": "Server",
+        "technologies": ["Django", "DRF", "FastAPI", "Flask", "pytest"]
+      },
+      {
+        "titre": "Backend PHP",
+        "description": "Développement d'applications métier et d'API en suivant une architecture MVC maintenable.",
+        "icon": "Code",
+        "technologies": ["Laravel", "PHP", "API REST"]
+      }
+    ]
+  },
+  {
+    "categorie": "Données & intégrations",
+    "elements": [
+      {
+        "titre": "Bases SQL et NoSQL",
+        "description": "Modélisation, requêtes, indexation, transactions, migrations et stratégies de cache pour des données fiables.",
         "icon": "Database",
-        "niveau": 82
+        "technologies": ["PostgreSQL", "MySQL", "MongoDB", "Redis", "SQLAlchemy"]
+      },
+      {
+        "titre": "Paiements et API financières",
+        "description": "Intégration de workflows de transaction, callbacks, webhooks, signatures et environnements sandbox ou production.",
+        "icon": "CreditCard",
+        "technologies": ["MTN MoMo", "CamPay", "CinetPay", "Maviance", "Webhooks"]
+      }
+    ]
+  },
+  {
+    "categorie": "Qualité & collaboration",
+    "elements": [
+      {
+        "titre": "Livraison et travail d'équipe",
+        "description": "Gestion de versions, revues de code, conteneurisation et organisation des sprints dans un environnement collaboratif.",
+        "icon": "Workflow",
+        "technologies": ["Git", "GitHub", "Docker", "Agile / Scrum"]
       }
     ]
   }

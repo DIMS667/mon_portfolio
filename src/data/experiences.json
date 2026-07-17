@@ -1,32 +1,52 @@
 [
   {
     "id": 1,
-    "entreprise": "kairos Damas",
-    "titre": "Développeur Frontend Web",
-    "periode": "Mai 2025 – Septembre 2025",
-    "lieu": "Yaounde",
-    "description": "Concentration sur le design moderne, les flux de travail et l'intégration d'API REST.",
-    "logo": "",
-    "actuel": false
+    "entreprise": "Atharif Financial",
+    "titre": "Développeur Full-stack",
+    "periode": "Depuis mai 2026",
+    "lieu": "Yaoundé, Cameroun",
+    "description": "Développement full-stack de solutions digitales dans le secteur financier, de l'interface utilisateur aux services backend, en lien direct avec les besoins métier.",
+    "technologies": ["React.js", "API REST", "Backend", "Fintech"],
+    "actuel": true
   },
   {
     "id": 2,
-    "entreprise": "POWERSOFT",
-    "titre": "Développeur Fullstack Web",
-    "periode": "Janvier 2025 – Avril 2025",
-    "lieu": "Quartier emia, Yaounde",
-    "description": "Maîtrise du frontend avec React.js et du backend avec Django.",
-    "logo": "",
+    "entreprise": "ADS",
+    "titre": "Développeur Full-stack Web",
+    "periode": "Novembre 2025 — mars 2026",
+    "lieu": "Douala · Remote / freelance",
+    "description": "Renfort technique full-stack pour accélérer la réalisation des sprints et améliorer la productivité de l'équipe de développement.",
+    "technologies": ["Full-stack", "Agile / Scrum", "Git"],
     "actuel": false
   },
   {
     "id": 3,
-    "entreprise": "SINARES",
+    "entreprise": "Kairos Damas",
+    "titre": "Développeur Frontend Web",
+    "periode": "Mai 2025 — septembre 2025",
+    "lieu": "Yaoundé, Cameroun",
+    "description": "Conception d'interfaces modernes, mise en place de logiques métier cohérentes et intégration d'API dans des applications frontend.",
+    "technologies": ["React.js", "UI responsive", "API REST"],
+    "actuel": false
+  },
+  {
+    "id": 4,
+    "entreprise": "Powersoft",
+    "titre": "Développeur Full-stack Web",
+    "periode": "Janvier 2025 — avril 2025",
+    "lieu": "Yaoundé · Présentiel / remote",
+    "description": "Développement d'interfaces React.js et valorisation des compétences backend avec Django au sein d'une équipe produit.",
+    "technologies": ["React.js", "Django", "Travail en équipe"],
+    "actuel": false
+  },
+  {
+    "id": 5,
+    "entreprise": "Sinares",
     "titre": "Développeur Backend",
-    "periode": "Juillet 2024 – Septembre 2024",
-    "lieu": "Kennedy, Yaoundé",
-    "description": "Renforcement des compétences backend avec Django REST Framework.",
-    "logo": "",
+    "periode": "Juillet 2024 — septembre 2024",
+    "lieu": "Yaoundé, Cameroun",
+    "description": "Création de services backend avec Django REST Framework et pratique de plusieurs protocoles d'échange : API REST, SOAP et WebSocket.",
+    "technologies": ["Django REST Framework", "SOAP", "WebSocket"],
     "actuel": false
   }
 ]

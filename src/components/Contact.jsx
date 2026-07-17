@@ -1,252 +1,118 @@
-import { motion } from "framer-motion";
-import { Mail, MessageCircle, Phone, Github, Linkedin, Twitter, Send, MapPin } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
+import { motion as Motion } from "framer-motion";
+import { ArrowUpRight, Github, Mail, MapPin, MessageCircle, Phone, Send } from "lucide-react";
+import { useTheme } from "../context/theme";
 import contactData from "../data/contact.json";
 
-const iconMap = {
-  Mail,
-  MessageCircle,
-  Phone,
-  Github,
-  Linkedin,
-  Twitter
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.1 }
-  })
-};
+const iconMap = { Mail, MessageCircle, Phone, Github };
 
 export default function Contact() {
   const { theme, mode, glassEffect } = useTheme();
+  const textColor = mode === "dark" ? theme.colors.textDark : theme.colors.text;
+  const mutedColor = `${textColor}bd`;
+  const cardBackground = mode === "dark" ? "rgba(15, 23, 42, 0.72)" : "rgba(255, 255, 255, 0.84)";
+  const currentYear = new Date().getFullYear();
 
   return (
-    <section
-      id="contact"
-      className="relative isolate overflow-hidden px-6 py-24"
-    >
-      {/* CORRECTION: Suppression du background qui cachait le fond d'écran */}
-
-      {/* Décor */}
-      <motion.div
-        animate={{ 
-          scale: [1, 1.2, 1],
-          rotate: [0, 180, 360]
-        }}
-        transition={{ duration: 30, repeat: Infinity }}
-        className="pointer-events-none absolute right-10 top-20 h-96 w-96 rounded-full opacity-10 blur-3xl"
-        style={{ background: theme.colors.accent }}
-      />
-
+    <section id="contact" className="relative isolate overflow-hidden px-4 pb-10 pt-20 sm:px-6 lg:pt-28">
       <div className="mx-auto max-w-6xl">
-        {/* Titre */}
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
+        <Motion.div
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mb-16 text-center"
-        >
-          <div className="mb-4 flex items-center justify-center gap-3">
-            <Send className="h-8 w-8" style={{ color: theme.colors.primary }} />
-            {/* CORRECTION: Titre avec couleur solide */}
-            <h2
-              className="text-4xl font-extrabold md:text-5xl"
-              style={{
-                color: mode === "dark" ? theme.colors.textDark : theme.colors.text
-              }}
-            >
-              Contact & Réseaux
-            </h2>
-          </div>
-          <p
-            className="mx-auto max-w-2xl text-base md:text-lg"
-            style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
-          >
-            {contactData.disponibilite}
-          </p>
-        </motion.div>
-
-        {/* Info principale */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="mb-16 rounded-3xl p-8 text-center shadow-2xl"
+          viewport={{ once: true, amount: 0.3 }}
+          className="overflow-hidden rounded-[2rem] p-6 shadow-2xl sm:p-10 lg:p-12"
           style={{
-            background: glassEffect
-              ? "rgba(255,255,255,0.1)"
-              : mode === "dark"
-              ? "rgba(255,255,255,0.05)"
-              : "white",
+            background: cardBackground,
             backdropFilter: glassEffect ? "blur(20px)" : "none",
-            border: `2px solid ${theme.colors.primary}30`
+            border: `1px solid ${theme.colors.primary}38`,
+            boxShadow: `0 30px 90px ${theme.colors.primary}18`,
           }}
         >
-          <div className="mb-4 flex items-center justify-center gap-2">
-            <MapPin className="h-5 w-5" style={{ color: theme.colors.primary }} />
-            <span
-              className="text-lg font-semibold"
-              style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
-            >
-              {contactData.location}
-            </span>
-          </div>
-          <p
-            className="text-sm"
-            style={{ color: mode === "dark" ? `${theme.colors.textDark}aa` : `${theme.colors.text}aa` }}
-          >
-            N'hésitez pas à me contacter pour une collaboration, un projet ou toute autre demande professionnelle
-          </p>
-        </motion.div>
-
-        {/* Méthodes de contact */}
-        <div className="mb-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {contactData.methodes_contact.map((method, i) => {
-            const Icon = iconMap[method.icon] || Mail;
-            return (
-              <motion.a
-                key={method.id}
-                href={method.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                whileHover={{ y: -8, scale: 1.03 }}
-                className="group relative overflow-hidden rounded-3xl p-6 shadow-xl"
-                style={{
-                  background: glassEffect
-                    ? "rgba(255,255,255,0.1)"
-                    : mode === "dark"
-                    ? "rgba(255,255,255,0.05)"
-                    : "white",
-                  backdropFilter: glassEffect ? "blur(20px)" : "none",
-                  border: `1px solid ${mode === "dark" ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}`
-                }}
+          <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+            <div className="min-w-0">
+              <span
+                className="mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-bold"
+                style={{ color: theme.colors.primary, background: `${theme.colors.primary}12` }}
               >
-                {/* Glow */}
-                <div
-                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  style={{
-                    background: `radial-gradient(circle at center, ${method.color}20, transparent)`
-                  }}
-                />
+                <Send className="h-4 w-4" aria-hidden="true" />
+                Parlons de votre projet
+              </span>
+              <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl" style={{ color: textColor }}>
+                Construisons quelque chose d'utile ensemble.
+              </h2>
+              <p className="mt-5 max-w-2xl text-base leading-relaxed sm:text-lg" style={{ color: mutedColor }}>
+                {contactData.disponibilite}. Je réponds volontiers aux besoins full-stack, mobile, API et fintech.
+              </p>
+              <p className="mt-5 flex items-center gap-2 text-sm font-semibold" style={{ color: textColor }}>
+                <MapPin className="h-4 w-4 shrink-0" style={{ color: theme.colors.primary }} aria-hidden="true" />
+                {contactData.location}
+              </p>
+            </div>
 
-                <div className="relative z-10 flex items-center gap-4">
-                  {/* Icône */}
-                  <div
-                    className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl transition-transform group-hover:scale-110 group-hover:rotate-6"
-                    style={{
-                      background: `${method.color}20`
-                    }}
+            <div className="grid gap-3">
+              {contactData.methodes_contact.map((method) => {
+                const Icon = iconMap[method.icon] || Mail;
+                const isExternal = method.href.startsWith("http");
+                return (
+                  <a
+                    key={method.id}
+                    href={method.href}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    className="group flex min-w-0 items-center gap-4 rounded-2xl p-4 transition-transform hover:-translate-y-0.5"
+                    style={{ background: `${method.color}0d`, border: `1px solid ${method.color}2d` }}
                   >
-                    <Icon className="h-7 w-7" style={{ color: method.color }} />
-                  </div>
-
-                  {/* Texte */}
-                  <div className="flex-1">
-                    <p
-                      className="mb-1 text-xs font-semibold uppercase tracking-wider"
-                      style={{ color: method.color }}
+                    <span
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
+                      style={{ color: method.color, background: `${method.color}16` }}
                     >
-                      {method.label}
-                    </p>
-                    <p
-                      className="text-sm font-medium"
-                      style={{ color: mode === "dark" ? theme.colors.textDark : theme.colors.text }}
-                    >
-                      {method.value}
-                    </p>
-                  </div>
-                </div>
+                      <Icon className="h-6 w-6" aria-hidden="true" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-xs font-extrabold uppercase tracking-wider" style={{ color: method.color }}>
+                        {method.label}
+                      </span>
+                      <span className="mt-1 block truncate text-sm font-semibold sm:text-base" style={{ color: textColor }}>
+                        {method.value}
+                      </span>
+                    </span>
+                    <ArrowUpRight className="h-5 w-5 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" style={{ color: method.color }} aria-hidden="true" />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </Motion.div>
 
-                {/* Border glow */}
-                <div
-                  className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  style={{
-                    boxShadow: `0 0 30px ${method.color}40`
-                  }}
-                />
-              </motion.a>
-            );
-          })}
-        </div>
+        <div className="flex flex-col items-center justify-between gap-5 py-8 text-center sm:flex-row sm:text-left">
+          <div>
+            <p className="text-sm font-semibold" style={{ color: mutedColor }}>
+              © {currentYear} Tonye Nwalal Jules Dimitri
+            </p>
+            <p className="mt-1 text-xs" style={{ color: `${textColor}8f` }}>
+              Conçu et développé au Cameroun.
+            </p>
+          </div>
 
-        {/* Réseaux sociaux */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <p
-            className="mb-6 text-sm font-semibold uppercase tracking-wider"
-            style={{ color: theme.colors.primary }}
-          >
-            Suivez-moi
-          </p>
-          <div className="flex justify-center gap-4">
-            {contactData.reseaux.map((reseau, i) => {
-              const Icon = iconMap[reseau.icon] || Github;
+          <div className="flex items-center gap-3">
+            {contactData.reseaux.map((network) => {
+              const Icon = iconMap[network.icon] || Github;
               return (
-                <motion.a
-                  key={reseau.id}
-                  href={reseau.url}
+                <a
+                  key={network.id}
+                  href={network.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.2, rotate: 5 }}
-                  whileTap={{ scale: 0.9 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex h-14 w-14 items-center justify-center rounded-2xl transition-all"
-                  style={{
-                    background: glassEffect
-                      ? "rgba(255,255,255,0.1)"
-                      : mode === "dark"
-                      ? "rgba(255,255,255,0.05)"
-                      : "rgba(0,0,0,0.05)",
-                    backdropFilter: glassEffect ? "blur(10px)" : "none"
-                  }}
-                  aria-label={reseau.nom}
+                  className="flex min-h-11 items-center gap-2 rounded-xl px-4 py-2 text-sm font-bold"
+                  style={{ color: textColor, background: `${theme.colors.primary}10` }}
+                  aria-label={`${network.nom} — ${network.username}`}
                 >
-                  <Icon className="h-6 w-6" style={{ color: theme.colors.primary }} />
-                </motion.a>
+                  <Icon className="h-5 w-5" style={{ color: theme.colors.primary }} aria-hidden="true" />
+                  {network.nom}
+                </a>
               );
             })}
           </div>
-        </motion.div>
-
-        {/* Footer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-20 text-center"
-        >
-          <p
-            className="text-sm"
-            style={{ color: mode === "dark" ? `${theme.colors.textDark}77` : `${theme.colors.text}77` }}
-          >
-            Conçu et développé par moi , Tonye Nwalal Jules Dimitri
-          </p>
-          <p
-            className="mt-2 text-xs"
-            style={{ color: mode === "dark" ? `${theme.colors.textDark}55` : `${theme.colors.text}55` }}
-          >
-            © 2025 - Tous droits réservés
-          </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -2,8 +2,9 @@
   "email": "tonyenwalal@gmail.com",
   "phone": "+237675953123",
   "whatsapp": "237694478577",
-  "location": "Yaoundé, Cameroun",
-  "disponibilite": "Disponible pour des opportunités",
+  "location": "Douala & Yaoundé, Cameroun",
+  "disponibilite": "Disponible pour un poste, une mission freelance ou une collaboration technique",
+  "portfolio": "https://mon-portfolio-68dd.onrender.com/",
   "reseaux": [
     {
       "id": 1,
@@ -20,7 +21,7 @@
       "value": "Écrire sur WhatsApp",
       "href": "https://api.whatsapp.com/send?phone=237694478577&text=Bonjour%2C%20je%20viens%20de%20visiter%20votre%20portfolio%20et%20je%20souhaite%20vous%20contacter.",
       "icon": "MessageCircle",
-      "color": "#25D366"
+      "color": "#15803D"
     },
     {
       "id": 2,
@@ -28,7 +29,7 @@
       "value": "tonyenwalal@gmail.com",
       "href": "mailto:tonyenwalal@gmail.com",
       "icon": "Mail",
-      "color": "#EA4335"
+      "color": "#B91C1C"
     },
     {
       "id": 3,
@@ -36,7 +37,7 @@
       "value": "+237 675 95 31 23",
       "href": "tel:+237675953123",
       "icon": "Phone",
-      "color": "#0088CC"
+      "color": "#0369A1"
     }
   ]
 }

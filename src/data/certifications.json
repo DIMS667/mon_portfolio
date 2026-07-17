@@ -1,29 +1,47 @@
 [
   {
     "id": 1,
-    "titre": "Python Programming",
-    "organisme": "Udemy",
-    "categorie": "Backend",
+    "titre": "Master 2 — Systèmes d'information et génie logiciel",
+    "organisme": "Université de Yaoundé I",
+    "categorie": "Diplôme",
     "date": "2025",
-    "url": "",
-    "badge": ""
+    "description": "Formation avancée en conception de systèmes d'information, architecture logicielle et ingénierie applicative.",
+    "url": ""
   },
   {
     "id": 2,
-    "titre": "Learn Django Web Development with Python Programming in This Hands-On Python Bootcamp",
-    "organisme": "Udemy",
-    "categorie": "Backend",
-    "date": "2025",
-    "url": "",
-    "badge": ""
+    "titre": "Master 1 — Systèmes d'information et génie logiciel",
+    "organisme": "Université de Yaoundé I",
+    "categorie": "Diplôme",
+    "date": "2024",
+    "description": "Approfondissement des méthodes de développement, des bases de données et de la conduite de projets numériques.",
+    "url": ""
   },
   {
     "id": 3,
-    "titre": "Master English conversation and start speaking like an American",
+    "titre": "Licence — Sciences mathématiques et informatique",
+    "organisme": "Université de Yaoundé I",
+    "categorie": "Diplôme",
+    "date": "2023",
+    "description": "Socle scientifique en algorithmique, programmation, mathématiques et systèmes informatiques.",
+    "url": ""
+  },
+  {
+    "id": 4,
+    "titre": "Python Programming",
     "organisme": "Udemy",
-    "categorie": "Autres",
+    "categorie": "Certification",
     "date": "2025",
-    "url": "",
-    "badge": ""
+    "description": "Consolidation des fondamentaux Python et de la programmation orientée objet.",
+    "url": ""
+  },
+  {
+    "id": 5,
+    "titre": "Django Web Development Bootcamp",
+    "organisme": "Udemy",
+    "categorie": "Certification",
+    "date": "2025",
+    "description": "Formation pratique à la création d'applications web avec Python et Django.",
+    "url": ""
   }
 ]

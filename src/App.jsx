@@ -8,25 +8,29 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import ThemeCustomizer from './components/ThemeCustomizer';
 import BackgroundAnimations from './components/BackgroundAnimations';
+import { MotionConfig } from 'framer-motion';
 
 function App() {
   return (
     <ThemeProvider>
-      {/* CORRECTION: Ajout du composant BackgroundAnimations */}
-      <BackgroundAnimations />
-      
-      <div className="relative scroll-smooth" style={{ fontFamily: 'var(--font-body)' }}>
-        <Header />
-        <main>
-          <Accueil />
-          <Projets />
-          <Competences />
-          <Experience />
-          <Certifications />
-          <Contact />
-        </main>
-        <ThemeCustomizer />
-      </div>
+      <MotionConfig reducedMotion="user">
+        <BackgroundAnimations />
+        <a className="skip-link" href="#contenu-principal">
+          Aller au contenu principal
+        </a>
+        <div className="relative" style={{ fontFamily: 'var(--font-body)' }}>
+          <Header />
+          <main id="contenu-principal">
+            <Accueil />
+            <Projets />
+            <Competences />
+            <Experience />
+            <Certifications />
+            <Contact />
+          </main>
+          <ThemeCustomizer />
+        </div>
+      </MotionConfig>
     </ThemeProvider>
   );
 }

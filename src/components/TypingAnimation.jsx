@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion as Motion, useInView } from "framer-motion";
 
 export function TypingAnimation({
   children,
@@ -130,7 +130,7 @@ export function TypingAnimation({
   };
 
   return (
-    <motion.span
+    <Motion.span
       ref={elementRef}
       className={className}
       style={style}
@@ -144,6 +144,6 @@ export function TypingAnimation({
           {getCursorChar()}
         </span>
       )}
-    </motion.span>
+    </Motion.span>
   );
 }

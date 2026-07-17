@@ -46,9 +46,9 @@
         "primary": "#8b5cf6",
         "secondary": "#6366f1",
         "accent": "#a78bfa",
-        "bg": "#1e1b4b",
+        "bg": "#f5f3ff",
         "bgDark": "#0f172a",
-        "text": "#e0e7ff",
+        "text": "#312e81",
         "textDark": "#c7d2fe"
       }
     },
@@ -72,9 +72,9 @@
         "primary": "#22d3ee",
         "secondary": "#a855f7",
         "accent": "#06b6d4",
-        "bg": "#0f172a",
+        "bg": "#ecfeff",
         "bgDark": "#020617",
-        "text": "#e0f2fe",
+        "text": "#164e63",
         "textDark": "#cbd5e1"
       }
     },

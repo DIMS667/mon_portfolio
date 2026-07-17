@@ -2,162 +2,162 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ========================================
-   VARIABLES CSS POUR LE THÈME DYNAMIQUE
-   ======================================== */
 :root {
-  --color-primary: #10b981;
-  --color-secondary: #059669;
-  --color-accent: #34d399;
-  --color-bg: #f0fdf4;
-  --color-bg-dark: #0f172a;
-  --color-text: #064e3b;
-  --color-text-dark: #e0f2fe;
-  --font-heading: 'Poppins', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --color-primary: #a78bfa;
+  --color-secondary: #818cf8;
+  --color-accent: #c4b5fd;
+  --color-on-primary: #020617;
+  --color-bg: #0f172a;
+  --color-text: #c7d2fe;
+  --font-heading: "Poppins", sans-serif;
+  --font-body: "Inter", sans-serif;
   --glass-effect: 1;
 }
 
-/* ========================================
-   RESET ET BASE
-   ======================================== */
 @layer base {
-  * {
-    margin: 0;
-    padding: 0;
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
 
   html {
     scroll-behavior: smooth;
+    background: var(--color-bg);
   }
 
   body {
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: clip;
+    color: var(--color-text);
+    background: var(--color-bg);
     font-family: var(--font-body);
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    min-height: 100vh;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-heading);
+    text-wrap: balance;
   }
 
-  /* CRITIQUE: Sections transparentes pour voir le fond animé */
-  section {
-    @apply py-20;
+  p {
+    overflow-wrap: anywhere;
+  }
+
+  img,
+  svg,
+  video {
+    max-width: 100%;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button {
+    touch-action: manipulation;
+  }
+
+  main > section {
     position: relative;
     z-index: 1;
-    background: transparent !important;
-  }
-
-  section:first-of-type {
-    @apply pt-32;
-  }
-
-  section > * {
-    position: relative;
-    z-index: 1;
+    scroll-margin-top: 4rem;
   }
 }
 
-/* ========================================
-   CLASSES UTILITAIRES
-   ======================================== */
 @layer utilities {
   .bg-theme {
     background-color: var(--color-bg);
-  }
-
-  .bg-theme-dark {
-    background-color: var(--color-bg-dark);
   }
 
   .text-theme {
     color: var(--color-text);
   }
 
-  .text-theme-dark {
-    color: var(--color-text-dark);
-  }
-
   .gradient-primary {
+    color: var(--color-on-primary);
     background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
     color: transparent;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
   }
 }
 
-/* ========================================
-   SCROLLBAR
-   ======================================== */
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 1000;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  font-weight: 700;
+  transform: translateY(-150%);
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg-dark);
+  background: var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
+  border: 2px solid var(--color-bg);
+  border-radius: 999px;
   background: var(--color-primary);
-  border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-secondary);
-}
-
-/* ========================================
-   SÉLECTION
-   ======================================== */
 ::selection {
+  color: var(--color-on-primary);
   background: var(--color-primary);
-  color: white;
 }
 
-/* ========================================
-   FOCUS
-   ======================================== */
 *:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-/* ========================================
-   ANIMATIONS
-   ======================================== */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+  border-radius: 0.25rem;
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
 }
 
 @keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
-@keyframes blob {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-}
-
-/* Animation pour le curseur de typing */
 @keyframes blink-cursor {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .animate-gradient {
@@ -165,23 +165,21 @@
   animation: gradient-shift 5s ease infinite;
 }
 
-.animate-blob {
-  animation: blob 8s ease-in-out infinite;
-}
-
 .animate-blink-cursor {
   animation: blink-cursor 1s step-end infinite;
 }
 
-/* ========================================
-   RESPONSIVE
-   ======================================== */
-@media (max-width: 768px) {
-  section {
-    @apply py-16;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 
-  section:first-of-type {
-    @apply pt-24;
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

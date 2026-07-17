@@ -1,39 +1,40 @@
-import { motion } from "framer-motion";
-import { useTheme } from "../context/ThemeContext";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
+import { motion as Motion, useReducedMotion } from "framer-motion";
+import { useTheme } from "../context/theme";
+
+function createItems(count, seedOffset = 0) {
+  return Array.from({ length: count }, (_, index) => {
+    const seed = index + 1 + seedOffset;
+    return {
+      id: `${seedOffset}-${index}`,
+      x: (seed * 37) % 100,
+      y: (seed * 61) % 100,
+      size: 3 + (seed % 4),
+      duration: 8 + (seed % 7),
+      delay: (seed % 5) * 0.35,
+      offsetX: ((seed * 29) % 80) - 40,
+      offsetY: ((seed * 43) % 120) - 60,
+    };
+  });
+}
 
 export default function BackgroundAnimations() {
   const { background, theme, mode } = useTheme();
-  const [particles, setParticles] = useState([]);
+  const reduceMotion = useReducedMotion();
+  const particles = useMemo(() => createItems(24), []);
+  const gridLights = useMemo(() => createItems(6, 40), []);
+  const primary = theme.colors.primary;
+  const secondary = theme.colors.secondary;
+  const accent = theme.colors.accent;
+  const pageBackground = mode === "dark" ? theme.colors.bgDark : theme.colors.bg;
 
-  // Générer des particules pour l'animation "particles"
-  useEffect(() => {
-    if (background === "particles") {
-      const newParticles = Array.from({ length: 50 }, (_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 4 + 2,
-        duration: Math.random() * 10 + 10,
-        delay: Math.random() * 5,
-      }));
-      setParticles(newParticles);
-    }
-  }, [background]);
-
-  // Couleurs basées sur le thème
-  const primaryColor = theme.colors.primary;
-  const secondaryColor = theme.colors.secondary;
-  const accentColor = theme.colors.accent;
-
-  // Fond selon le type sélectionné
   const renderBackground = () => {
     switch (background) {
       case "particles":
         return (
-          <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 overflow-hidden">
             {particles.map((particle) => (
-              <motion.div
+              <Motion.span
                 key={particle.id}
                 className="absolute rounded-full"
                 style={{
@@ -41,14 +42,13 @@ export default function BackgroundAnimations() {
                   top: `${particle.y}%`,
                   width: particle.size,
                   height: particle.size,
-                  background: primaryColor,
-                  opacity: 0.4,
+                  background: primary,
+                  opacity: 0.35,
                 }}
-                animate={{
-                  y: [0, -100, 0],
-                  x: [0, Math.random() * 50 - 25, 0],
-                  opacity: [0.2, 0.6, 0.2],
-                  scale: [1, 1.2, 1],
+                animate={reduceMotion ? undefined : {
+                  x: [0, particle.offsetX, 0],
+                  y: [0, -70, 0],
+                  opacity: [0.18, 0.48, 0.18],
                 }}
                 transition={{
                   duration: particle.duration,
@@ -63,143 +63,84 @@ export default function BackgroundAnimations() {
 
       case "waves":
         return (
-          <div className="fixed inset-0 overflow-hidden pointer-events-none">
-            {[...Array(5)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-full"
+          <div className="absolute inset-0 overflow-hidden">
+            {[0, 1, 2].map((index) => (
+              <Motion.div
+                key={index}
+                className="absolute -left-[10%] w-[120%] rounded-[50%]"
                 style={{
-                  height: "400px",
-                  bottom: `-${i * 50}px`,
-                  background: `linear-gradient(180deg, ${primaryColor}${Math.floor((5 - i) * 4).toString(16).padStart(2, '0')}, transparent)`,
-                  borderRadius: "50%",
+                  height: 360,
+                  bottom: -230 - index * 45,
+                  background: `linear-gradient(180deg, ${primary}${18 - index * 4}, transparent)`,
                 }}
-                animate={{
-                  x: [0, 100, 0],
-                  scaleX: [1, 1.2, 1],
-                }}
-                transition={{
-                  duration: 15 + i * 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.5,
-                }}
+                animate={reduceMotion ? undefined : { x: [0, 55, 0], scaleX: [1, 1.08, 1] }}
+                transition={{ duration: 15 + index * 3, repeat: Infinity, ease: "easeInOut" }}
               />
             ))}
           </div>
         );
 
-      case "mesh":
-        return (
-          <div className="fixed inset-0 overflow-hidden pointer-events-none">
-            <motion.div
-              className="absolute inset-0"
-              style={{
-                background: `
-                  radial-gradient(at 40% 20%, ${primaryColor}33 0px, transparent 50%),
-                  radial-gradient(at 80% 0%, ${secondaryColor}33 0px, transparent 50%),
-                  radial-gradient(at 0% 50%, ${accentColor}33 0px, transparent 50%),
-                  radial-gradient(at 80% 80%, ${primaryColor}33 0px, transparent 50%),
-                  radial-gradient(at 0% 100%, ${secondaryColor}33 0px, transparent 50%)
-                `,
-              }}
-              animate={{
-                scale: [1, 1.1, 1],
-                rotate: [0, 5, 0],
-              }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          </div>
-        );
-
       case "grid":
         return (
-          <div className="fixed inset-0 overflow-hidden pointer-events-none">
-            {/* Grille horizontale */}
-            <div className="absolute inset-0" style={{ 
-              backgroundImage: `linear-gradient(${primaryColor}22 1px, transparent 1px)`,
-              backgroundSize: "100% 50px",
-            }}>
-              <motion.div
-                className="h-full w-full"
-                animate={{ y: [0, 50, 0] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-              />
-            </div>
-            
-            {/* Grille verticale */}
-            <div className="absolute inset-0" style={{ 
-              backgroundImage: `linear-gradient(90deg, ${primaryColor}22 1px, transparent 1px)`,
-              backgroundSize: "50px 100%",
-            }}>
-              <motion.div
-                className="h-full w-full"
-                animate={{ x: [0, 50, 0] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-              />
-            </div>
-
-            {/* Points lumineux qui se déplacent */}
-            {[...Array(10)].map((_, i) => (
-              <motion.div
-                key={i}
+          <div className="absolute inset-0 overflow-hidden">
+            <Motion.div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `linear-gradient(${primary}18 1px, transparent 1px), linear-gradient(90deg, ${primary}18 1px, transparent 1px)`,
+                backgroundSize: "50px 50px",
+              }}
+              animate={reduceMotion ? undefined : { backgroundPosition: ["0px 0px", "50px 50px"] }}
+              transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+            />
+            {gridLights.map((light) => (
+              <Motion.span
+                key={light.id}
                 className="absolute rounded-full"
                 style={{
-                  width: 8,
-                  height: 8,
-                  background: primaryColor,
-                  boxShadow: `0 0 20px ${primaryColor}`,
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
+                  left: `${light.x}%`,
+                  top: `${light.y}%`,
+                  width: light.size,
+                  height: light.size,
+                  background: primary,
+                  boxShadow: `0 0 18px ${primary}`,
                 }}
-                animate={{
-                  x: [0, Math.random() * 200 - 100, 0],
-                  y: [0, Math.random() * 200 - 100, 0],
-                  opacity: [0.3, 1, 0.3],
+                animate={reduceMotion ? undefined : {
+                  x: [0, light.offsetX, 0],
+                  y: [0, light.offsetY, 0],
+                  opacity: [0.2, 0.8, 0.2],
                 }}
-                transition={{
-                  duration: 5 + Math.random() * 5,
-                  repeat: Infinity,
-                  delay: Math.random() * 2,
-                }}
+                transition={{ duration: light.duration, repeat: Infinity, ease: "easeInOut" }}
               />
             ))}
           </div>
         );
 
       case "static":
+        return null;
+
+      case "mesh":
+      default:
         return (
-          <div 
-            className="fixed inset-0 pointer-events-none"
+          <Motion.div
+            className="absolute -inset-[8%]"
             style={{
-              background: mode === "dark" 
-                ? theme.colors.bgDark 
-                : theme.colors.bg
+              background: `
+                radial-gradient(at 35% 18%, ${primary}2b 0, transparent 48%),
+                radial-gradient(at 82% 8%, ${secondary}22 0, transparent 44%),
+                radial-gradient(at 8% 66%, ${accent}20 0, transparent 46%),
+                radial-gradient(at 78% 82%, ${primary}22 0, transparent 48%)
+              `,
             }}
+            animate={reduceMotion ? undefined : { scale: [1, 1.04, 1], rotate: [0, 1.5, 0] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
           />
         );
-
-      default:
-        return null;
     }
   };
 
   return (
-    <div className="fixed inset-0 -z-10">
-      {/* Couleur de fond de base */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: mode === "dark" 
-            ? theme.colors.bgDark 
-            : theme.colors.bg
-        }}
-      />
-      {/* Animation par-dessus */}
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+      <div className="absolute inset-0" style={{ background: pageBackground }} />
       {renderBackground()}
     </div>
   );
