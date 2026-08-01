@@ -41,13 +41,13 @@
     "Git & GitHub"
   ],
   "sceneIcons": [
-    { "id": "javascript", "type": "mono", "label": "JS", "background": "#F7DF1E", "foreground": "#1D1B2E", "position": [-3.4, 1.6, 0] },
-    { "id": "react", "type": "react", "label": "React", "background": "#1D1B2E", "foreground": "#61DAFB", "position": [3.4, 1.4, -1] },
-    { "id": "laravel", "type": "mono", "label": "Lv", "background": "#FF2D20", "foreground": "#FFFFFF", "position": [-2.8, -1.7, -0.4] },
-    { "id": "php", "type": "mono", "label": "php", "background": "#777BB4", "foreground": "#FFFFFF", "fontSize": 46, "position": [2.9, -1.7, 0.4] },
-    { "id": "mysql", "type": "mono", "label": "SQL", "background": "#00758F", "foreground": "#FFFFFF", "fontSize": 50, "position": [0.1, 2.5, -1.8] },
-    { "id": "git", "type": "git", "label": "Git", "background": "#F05033", "foreground": "#FFFFFF", "position": [4.2, -0.2, -1.2] },
-    { "id": "css", "type": "mono", "label": "CSS", "background": "#2965F1", "foreground": "#FFFFFF", "fontSize": 48, "position": [-4.2, -0.1, -0.8] }
+    { "id": "javascript", "type": "mono", "label": "JS", "background": "#F7DF1E", "foreground": "#1D1B2E", "position": [2.2, 1.85, 0.2] },
+    { "id": "react", "type": "react", "label": "React", "background": "#1D1B2E", "foreground": "#61DAFB", "position": [5.15, 1.35, -0.6] },
+    { "id": "laravel", "type": "mono", "label": "Lv", "background": "#FF2D20", "foreground": "#FFFFFF", "position": [3.45, -1.45, 0.1] },
+    { "id": "php", "type": "mono", "label": "php", "background": "#777BB4", "foreground": "#FFFFFF", "fontSize": 46, "position": [5.25, -1.4, -0.3] },
+    { "id": "mysql", "type": "mono", "label": "SQL", "background": "#00758F", "foreground": "#FFFFFF", "fontSize": 50, "position": [3.75, 2.35, -1.1] },
+    { "id": "git", "type": "git", "label": "Git", "background": "#F05033", "foreground": "#FFFFFF", "position": [5.05, 0, -1] },
+    { "id": "css", "type": "mono", "label": "CSS", "background": "#2965F1", "foreground": "#FFFFFF", "fontSize": 48, "position": [2.55, 0.2, -0.5] }
   ],
   "projects": [
     {
@@ -128,11 +128,11 @@
     "whatsapp": "237694478577",
     "location": "Douala & Yaoundé, Cameroun",
     "github": "https://github.com/DIMS667",
-    "portfolio": "https://mon-portfolio-68dd.onrender.com/",
+    "linkedin": "https://www.linkedin.com/in/tonye-nwalal-jules-dimitri-30b507339/",
     "whatsappMessage": "Bonjour Jules Dimitri, je viens de visiter votre portfolio et je souhaite échanger avec vous.",
     "socials": [
       { "label": "GitHub", "url": "https://github.com/DIMS667" },
-      { "label": "Portfolio", "url": "https://mon-portfolio-68dd.onrender.com/" },
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/tonye-nwalal-jules-dimitri-30b507339/" },
       { "label": "Télécharger CV", "url": "/CV_TONYE NWALAL_JULES DIMITRI.pdf", "download": true }
     ]
   },

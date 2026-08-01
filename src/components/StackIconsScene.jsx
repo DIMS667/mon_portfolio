@@ -125,12 +125,20 @@ export default function StackIconsScene() {
       sprite.scale.set(1.5, 1.5, 1);
       sprite.position.set(...icon.position);
       sprite.userData = {
+        baseX: icon.position[0],
         baseY: icon.position[1],
         speed: 0.52 + index * 0.055,
         amplitude: 0.16 + (index % 3) * 0.045,
         wobbleSpeed: 0.42 + index * 0.04,
         wobbleAmplitude: 0.1 + (index % 2) * 0.035,
         phase: index * 0.92,
+        offsetX: 0,
+        offsetY: 0,
+        velocityX: 0,
+        velocityY: 0,
+        spin: 0,
+        spinVelocity: 0,
+        scaleBoost: 0,
       };
       group.add(sprite);
       return sprite;
@@ -143,6 +151,8 @@ export default function StackIconsScene() {
     let currentY = 0;
     let frameId;
     const clock = new THREE.Clock();
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
 
     const resize = () => {
       const width = Math.max(1, hero.clientWidth);
@@ -150,6 +160,8 @@ export default function StackIconsScene() {
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      group.visible = width >= 1080;
+      canvas.style.pointerEvents = group.visible && !reducedMotion ? "auto" : "none";
       if (reducedMotion) renderer.render(scene, camera);
     };
 
@@ -159,14 +171,74 @@ export default function StackIconsScene() {
       pointerY = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
     };
 
+    const pickIcon = (event) => {
+      if (!group.visible) return null;
+      const bounds = canvas.getBoundingClientRect();
+      pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
+      pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1;
+      raycaster.setFromCamera(pointer, camera);
+      return raycaster.intersectObjects(sprites, false)[0]?.object || null;
+    };
+
+    const handleCanvasPointerMove = (event) => {
+      canvas.style.cursor = pickIcon(event) ? "pointer" : "default";
+    };
+
+    const handleCanvasPointerLeave = () => {
+      canvas.style.cursor = "default";
+    };
+
+    const handleCanvasClick = (event) => {
+      const sprite = pickIcon(event);
+      if (!sprite) return;
+
+      const direction = Math.random() > 0.5 ? 1 : -1;
+      const motion = sprite.userData;
+      motion.velocityX += direction * 2.4;
+      motion.velocityY += 3.6;
+      motion.spinVelocity += direction * 7;
+      motion.scaleBoost = Math.max(motion.scaleBoost, 0.38);
+
+      sprites.forEach((otherSprite) => {
+        if (otherSprite !== sprite) {
+          otherSprite.userData.scaleBoost = Math.max(
+            otherSprite.userData.scaleBoost,
+            0.06,
+          );
+        }
+      });
+    };
+
     const render = () => {
-      const elapsed = clock.getElapsedTime();
+      const delta = Math.min(clock.getDelta(), 0.05);
+      const elapsed = clock.elapsedTime;
       sprites.forEach((sprite) => {
         const motion = sprite.userData;
+        const damping = Math.exp(-7 * delta);
+
+        motion.velocityX += -motion.offsetX * 18 * delta;
+        motion.velocityY += -motion.offsetY * 18 * delta;
+        motion.velocityX *= damping;
+        motion.velocityY *= damping;
+        motion.offsetX += motion.velocityX * delta;
+        motion.offsetY += motion.velocityY * delta;
+
+        motion.spinVelocity += -motion.spin * 20 * delta;
+        motion.spinVelocity *= damping;
+        motion.spin += motion.spinVelocity * delta;
+        motion.scaleBoost *= Math.exp(-8 * delta);
+
+        sprite.position.x = motion.baseX + motion.offsetX;
         sprite.position.y =
-          motion.baseY + Math.sin(elapsed * motion.speed + motion.phase) * motion.amplitude;
+          motion.baseY +
+          Math.sin(elapsed * motion.speed + motion.phase) * motion.amplitude +
+          motion.offsetY;
         sprite.material.rotation =
-          Math.sin(elapsed * motion.wobbleSpeed + motion.phase) * motion.wobbleAmplitude;
+          Math.sin(elapsed * motion.wobbleSpeed + motion.phase) *
+            motion.wobbleAmplitude +
+          motion.spin;
+        const scale = 1.5 * (1 + motion.scaleBoost);
+        sprite.scale.set(scale, scale, 1);
       });
       currentX += (pointerX - currentX) * 0.04;
       currentY += (pointerY - currentY) * 0.04;
@@ -181,6 +253,11 @@ export default function StackIconsScene() {
     if (hasFinePointer && !reducedMotion) {
       hero.addEventListener("pointermove", handlePointerMove, { passive: true });
     }
+    if (!reducedMotion) {
+      canvas.addEventListener("pointermove", handleCanvasPointerMove, { passive: true });
+      canvas.addEventListener("pointerleave", handleCanvasPointerLeave);
+      canvas.addEventListener("click", handleCanvasClick);
+    }
     window.addEventListener("resize", resize, { passive: true });
 
     if (reducedMotion) renderer.render(scene, camera);
@@ -189,6 +266,9 @@ export default function StackIconsScene() {
     return () => {
       if (frameId) window.cancelAnimationFrame(frameId);
       hero.removeEventListener("pointermove", handlePointerMove);
+      canvas.removeEventListener("pointermove", handleCanvasPointerMove);
+      canvas.removeEventListener("pointerleave", handleCanvasPointerLeave);
+      canvas.removeEventListener("click", handleCanvasClick);
       window.removeEventListener("resize", resize);
       sprites.forEach((sprite) => {
         sprite.material.map?.dispose();

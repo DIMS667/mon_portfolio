@@ -3,12 +3,26 @@ import profile from "../data/profile.json";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const StackIconsScene = lazy(() => import("./StackIconsScene"));
+const DESKTOP_SCENE_QUERY = "(min-width: 1080px)";
 
 export default function Hero() {
   const reducedMotion = useReducedMotion();
+  const [showScene, setShowScene] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia(DESKTOP_SCENE_QUERY).matches,
+  );
   const [roleIndex, setRoleIndex] = useState(0);
   const [roleVisible, setRoleVisible] = useState(true);
   const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(DESKTOP_SCENE_QUERY);
+    const syncScene = () => setShowScene(mediaQuery.matches);
+    syncScene();
+    mediaQuery.addEventListener("change", syncScene);
+    return () => mediaQuery.removeEventListener("change", syncScene);
+  }, []);
 
   useEffect(() => {
     if (reducedMotion || profile.roles.length < 2) return undefined;
@@ -30,9 +44,11 @@ export default function Hero() {
   return (
     <header id="accueil" className="reference-hero">
       <div className="reference-hero-canvas">
-        <Suspense fallback={null}>
-          <StackIconsScene />
-        </Suspense>
+        {showScene ? (
+          <Suspense fallback={null}>
+            <StackIconsScene />
+          </Suspense>
+        ) : null}
       </div>
 
       <div className="reference-wrap reference-hero-content">
