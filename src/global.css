@@ -539,6 +539,8 @@ body {
 
 .reference-project-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   padding: 30px 22px 22px;
   border: 3px solid var(--ink-ui);
   border-radius: 20px;
@@ -595,6 +597,36 @@ body {
   background: var(--canvas);
   font-family: "JetBrains Mono", monospace;
   font-size: 0.72rem;
+}
+
+.reference-project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.reference-project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 2px solid var(--ink-ui);
+  border-radius: 10px;
+  color: var(--ink-ui);
+  background: var(--canvas);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.reference-project-link:hover {
+  color: var(--ink-solid);
+  background: #2ec4b6;
+  transform: translateY(-2px);
 }
 
 .reference-about-grid {
@@ -844,6 +876,43 @@ body {
   font-family: "JetBrains Mono", monospace;
   font-size: 0.78rem;
   opacity: 0.65;
+}
+
+.reference-json-profile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px 2px;
+}
+
+.reference-json-profile img {
+  width: 76px;
+  height: 76px;
+  flex: 0 0 auto;
+  border: 3px solid #f6f7fb;
+  border-radius: 18px;
+  object-fit: cover;
+  object-position: center 35%;
+  box-shadow: 4px 4px 0 #ff6b57;
+  transform: rotate(-2deg);
+}
+
+.reference-json-profile strong,
+.reference-json-profile span {
+  display: block;
+}
+
+.reference-json-profile strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+}
+
+.reference-json-profile span {
+  margin-top: 4px;
+  color: #2ec4b6;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  line-height: 1.5;
 }
 
 .reference-json-view {
@@ -1176,6 +1245,25 @@ body {
   .reference-json-hint {
     padding: 9px 15px 0;
     font-size: 0.7rem;
+  }
+
+  .reference-json-profile {
+    gap: 13px;
+    padding: 13px 15px 2px;
+  }
+
+  .reference-json-profile img {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+  }
+
+  .reference-json-profile strong {
+    font-size: 0.9rem;
+  }
+
+  .reference-json-profile span {
+    font-size: 0.66rem;
   }
 
   .reference-json-view {

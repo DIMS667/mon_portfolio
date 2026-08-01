@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import profile from "../data/profile.json";
+import profilePhoto from "../assets/photo.jpg";
 
 function highlightJson(value) {
   const escaped = JSON.stringify(value, null, 2)
@@ -113,6 +114,13 @@ export default function JsonModal({ open, onClose, triggerRef }) {
           </button>
         </div>
 
+        <div className="reference-json-profile">
+          <img src={profilePhoto} alt={`Portrait de ${profile.fullName}`} />
+          <div>
+            <strong>{profile.fullName}</strong>
+            <span>{profile.role}</span>
+          </div>
+        </div>
         <p className="reference-json-hint">{profile.ui.jsonHint}</p>
         <pre
           className="reference-json-view"
