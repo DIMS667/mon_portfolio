@@ -3,25 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0f172a" />
+    <meta name="theme-color" content="#F6F7FB" />
     <meta
       name="description"
-      content="Portfolio de Jules Dimitri, ingénieur en systèmes d'information et développeur full-stack spécialisé en Django, FastAPI, React.js, Flutter et API financières."
+      content="Portfolio de Jules Dimitri, ingénieur en systèmes d'information et développeur full-stack spécialisé en produits web, mobile, API et fintech."
     />
     <meta name="author" content="Tonye Nwalal Jules Dimitri" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Jules Dimitri — Développeur full-stack" />
-    <meta
-      property="og:description"
-      content="Découvrez mes expériences, projets et compétences en développement web, mobile, API et fintech."
-    />
+    <meta property="og:title" content="Jules Dimitri — Ingénieur SI & développeur full-stack" />
+    <meta property="og:description" content="Projets, stack et parcours de Jules Dimitri, développeur full-stack au Cameroun." />
     <meta property="og:url" content="https://mon-portfolio-68dd.onrender.com/" />
-    <meta name="twitter:card" content="summary" />
     <link rel="canonical" href="https://mon-portfolio-68dd.onrender.com/" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      (() => {
+        try {
+          const saved = localStorage.getItem("theme");
+          const dark = saved === "dark" || (!saved && matchMedia("(prefers-color-scheme: dark)").matches);
+          document.documentElement.classList.toggle("dark", dark);
+          document.documentElement.dataset.theme = dark ? "dark" : "light";
+          document.documentElement.style.colorScheme = dark ? "dark" : "light";
+        } catch {
+          document.documentElement.classList.remove("dark");
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script>
     <title>Jules Dimitri — Ingénieur SI & développeur full-stack</title>
   </head>
   <body>

@@ -5,23 +5,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: "var(--color-primary)",
-          50: "var(--color-primary)",
-        },
-        secondary: {
-          DEFAULT: "var(--color-secondary)",
-        },
-        accent: {
-          DEFAULT: "var(--color-accent)",
-        },
+        canvas: "#F6F7FB",
+        "canvas-dark": "#15131C",
+        paper: "#FFFFFF",
+        "paper-dark": "#211F2C",
+        ink: "#1D1B2E",
+        "ink-light": "#F3F1F7",
+        coral: "#FF6B57",
+        yellow: "#FFC94A",
+        mint: "#2EC4B6",
+        grape: "#8C6FF7",
+        whatsapp: "#25D366",
       },
       fontFamily: {
-        heading: ["var(--font-heading)", "sans-serif"],
-        body: ["var(--font-body)", "sans-serif"],
-      },
-      animation: {
-        gradient: "gradient-shift 5s ease infinite",
+        display: ['"Space Grotesk"', "sans-serif"],
+        body: ['"Plus Jakarta Sans"', "sans-serif"],
+        hand: ['"Caveat"', "cursive"],
+        mono: ['"JetBrains Mono"', "monospace"],
       },
     },
   },

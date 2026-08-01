@@ -1,13 +1,34 @@
-# React + Vite
+# Portfolio de Jules Dimitri
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portfolio professionnel de Tonye Nwalal Jules Dimitri, ingénieur en systèmes d'information et développeur full-stack.
 
-Currently, two official plugins are available:
+## Stack active
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 19 et Vite
+- Tailwind CSS
+- Three.js et React Three Fiber
 
-## Expanding the ESLint configuration
+## Lancer le projet
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-"# mon_portfolio" 
+```bash
+npm install
+npm run dev
+```
+
+## Vérifications
+
+```bash
+npm run lint
+npm run build
+```
+
+## Architecture active
+
+- `src/data/profile.json` : source unique du contenu professionnel
+- `src/components/StackIconsScene.jsx` : sept badges dessinés avec Canvas 2D et rendus en sprites Three.js
+- `src/components/JsonModal.jsx` : vue JSON accessible et copiable
+- `src/components/*Section.jsx` : projets, présentation, stack et contact
+- `src/hooks/useTheme.js` : thème clair/sombre persistant
+- `src/hooks/useReducedMotion.js` : respect de la préférence de réduction des mouvements
+
+La scène Three.js est chargée dans un chunk séparé. React Three Fiber gère automatiquement le redimensionnement du canvas et les textures personnalisées sont libérées au démontage.

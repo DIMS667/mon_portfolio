@@ -1,23 +1,182 @@
 {
-  "nom": "Tonye Nwalal Jules Dimitri",
-  "prenom": "Jules Dimitri",
-  "nom_complet": "Tonye Nwalal Jules Dimitri",
-  "nom_affiche": "Jules Dimitri",
-  "titre": "Ingénieur en systèmes d'information & développeur full-stack",
-  "accroche": "Je transforme des besoins métier en produits web et mobile fiables, performants et simples à utiliser.",
-  "specialites": ["Django & FastAPI", "React.js & Flutter", "API & paiements"],
-  "bio": "Développeur full-stack polyvalent, je travaille avec Python, Laravel et les technologies frontend modernes. J'interviens de la conception à la mise en production avec une approche pragmatique, collaborative et orientée résultats.",
-  "photo": "/assets/photo.jpg",
-  "cv": "/CV_TONYE NWALAL_JULES DIMITRI.pdf",
-  "annees_experience": 2,
-  "projets_realises": 25,
-  "technologies_maitrisees": 12,
-  "status": "Ouvert aux opportunités",
-  "localisation": "Douala & Yaoundé, Cameroun",
-  "formation_principale": "Master 2 — Systèmes d'information et génie logiciel",
-  "langues": [
-    { "langue": "Français", "niveau": "Courant" },
-    { "langue": "Anglais", "niveau": "Professionnel" }
+  "name": "Jules Dimitri",
+  "fullName": "Tonye Nwalal Jules Dimitri",
+  "handle": "jules",
+  "role": "Ingénieur SI & développeur full-stack",
+  "status": "Ouvert aux opportunités ☕",
+  "tagline": "Je transforme des besoins métier en produits web et mobile fiables, performants et simples à utiliser.",
+  "roles": [
+    "ingénieur SI & développeur full-stack",
+    "constructeur d’API et de produits fintech",
+    "développeur React, Django & Flutter",
+    "du besoin métier à la mise en production"
   ],
-  "interets": ["Football", "Lecture", "Intelligence artificielle", "Architecture logicielle", "Open source"]
+  "bio": "Développeur full-stack polyvalent, je travaille avec Python, Laravel et les technologies frontend modernes. J’interviens de la conception à la mise en production avec une approche pragmatique, collaborative et orientée résultats.",
+  "bioHighlight": "de la conception à la mise en production",
+  "offDuty": [
+    "le football",
+    "la lecture",
+    "l’intelligence artificielle",
+    "l’architecture logicielle",
+    "l’open source"
+  ],
+  "location": "Douala & Yaoundé, Cameroun",
+  "education": "Master 2 — Systèmes d’information et génie logiciel",
+  "currentCompany": "Atharif Financial",
+  "cv": "/CV_TONYE NWALAL_JULES DIMITRI.pdf",
+  "stats": [
+    { "value": "2+", "label": "années d’expérience" },
+    { "value": "25+", "label": "projets réalisés" },
+    { "value": "12+", "label": "technologies maîtrisées" }
+  ],
+  "skills": [
+    "JavaScript",
+    "React.js",
+    "PHP",
+    "Laravel",
+    "MySQL",
+    "Django",
+    "FastAPI",
+    "Flutter",
+    "Git & GitHub"
+  ],
+  "sceneIcons": [
+    { "id": "javascript", "type": "mono", "label": "JS", "background": "#F7DF1E", "foreground": "#1D1B2E", "position": [-3.4, 1.6, 0] },
+    { "id": "react", "type": "react", "label": "React", "background": "#1D1B2E", "foreground": "#61DAFB", "position": [3.4, 1.4, -1] },
+    { "id": "laravel", "type": "mono", "label": "Lv", "background": "#FF2D20", "foreground": "#FFFFFF", "position": [-2.8, -1.7, -0.4] },
+    { "id": "php", "type": "mono", "label": "php", "background": "#777BB4", "foreground": "#FFFFFF", "fontSize": 46, "position": [2.9, -1.7, 0.4] },
+    { "id": "mysql", "type": "mono", "label": "SQL", "background": "#00758F", "foreground": "#FFFFFF", "fontSize": 50, "position": [0.1, 2.5, -1.8] },
+    { "id": "git", "type": "git", "label": "Git", "background": "#F05033", "foreground": "#FFFFFF", "position": [4.2, -0.2, -1.2] },
+    { "id": "css", "type": "mono", "label": "CSS", "background": "#2965F1", "foreground": "#FFFFFF", "fontSize": 48, "position": [-4.2, -0.1, -0.8] }
+  ],
+  "projects": [
+    {
+      "id": "score-ia",
+      "title": "Score IA — Scoring bancaire",
+      "description": "Produit full-stack d’aide à l’analyse du risque de crédit, avec calcul d’un score de fiabilité et visualisation des demandes de prêt.",
+      "tags": ["machine-learning", "api-rest", "react", "fintech"],
+      "pin": "mint",
+      "links": [
+        { "label": "Backend", "url": "https://github.com/DIMS667/Backend_scoring_ia" },
+        { "label": "Frontend", "url": "https://github.com/DIMS667/frontend-score-ia" }
+      ]
+    },
+    {
+      "id": "publicpay",
+      "title": "PublicPay — Paiement QR",
+      "description": "API de paiement qui génère des QR codes et orchestre des transactions Mobile Money dans un environnement sécurisé.",
+      "tags": ["api-rest", "qr-code", "mtn-momo", "campay"],
+      "pin": "coral",
+      "links": [
+        { "label": "Code source", "url": "https://github.com/DIMS667/publicpay-Backend" }
+      ]
+    },
+    {
+      "id": "maison-bleue",
+      "title": "La Maison Bleue de Julien",
+      "description": "Expérience web destinée à une association engagée auprès des personnes autistes, avec contenus interactifs et parcours de soutien.",
+      "tags": ["react", "mantine", "cinetpay", "impact-social"],
+      "pin": "grape",
+      "links": [
+        { "label": "Code source", "url": "https://github.com/DIMS667/Maison-bleue-de-julien.git" }
+      ]
+    },
+    {
+      "id": "gemini-api",
+      "title": "API REST pour Gemini",
+      "description": "Service backend qui expose les capacités de Gemini à des applications clientes via une API REST simple.",
+      "tags": ["gemini", "google-ai", "backend", "api-rest"],
+      "pin": "yellow",
+      "links": [
+        { "label": "Code source", "url": "https://github.com/DIMS667/IA_GEMINI_BACKEND" }
+      ]
+    },
+    {
+      "id": "complexity",
+      "title": "Template d’application IA",
+      "description": "Base d’interface moderne conçue pour intégrer rapidement des fonctionnalités d’intelligence artificielle dans un produit web.",
+      "tags": ["react", "ui-responsive", "intelligence-artificielle"],
+      "pin": "mint",
+      "links": [
+        { "label": "Code source", "url": "https://github.com/DIMS667/complexity" }
+      ]
+    },
+    {
+      "id": "site-scolaire",
+      "title": "Plateforme scolaire full-stack",
+      "description": "Application de gestion scolaire reliant une API Django REST Framework à une interface React.js.",
+      "tags": ["django", "drf", "react", "sqlite"],
+      "pin": "grape",
+      "links": [
+        { "label": "Code source", "url": "https://github.com/DIMS667/SITE-SCOLAIRE-API.git" }
+      ]
+    },
+    {
+      "id": "gestion-ecole",
+      "title": "Gestion d’établissement scolaire",
+      "description": "Application Django centralisant les informations et les opérations courantes d’un établissement scolaire.",
+      "tags": ["django", "python", "sqlite"],
+      "pin": "coral",
+      "links": [
+        { "label": "Code source", "url": "https://github.com/DIMS667/Gestion_ecole.git" }
+      ]
+    }
+  ],
+  "contact": {
+    "email": "tonyenwalal@gmail.com",
+    "phone": "+237675953123",
+    "whatsapp": "237694478577",
+    "location": "Douala & Yaoundé, Cameroun",
+    "github": "https://github.com/DIMS667",
+    "portfolio": "https://mon-portfolio-68dd.onrender.com/",
+    "whatsappMessage": "Bonjour Jules Dimitri, je viens de visiter votre portfolio et je souhaite échanger avec vous.",
+    "socials": [
+      { "label": "GitHub", "url": "https://github.com/DIMS667" },
+      { "label": "Portfolio", "url": "https://mon-portfolio-68dd.onrender.com/" },
+      { "label": "Télécharger CV", "url": "/CV_TONYE NWALAL_JULES DIMITRI.pdf", "download": true }
+    ]
+  },
+  "navigation": [
+    { "label": "Projets", "href": "#projets" },
+    { "label": "À propos", "href": "#a-propos" },
+    { "label": "Stack", "href": "#stack" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "ui": {
+    "jsonButton": "{ } me.json",
+    "heroEyebrow": "Salut, moi c’est Jules 👋",
+    "heroTitlePrefix": "Je construis des",
+    "heroTitleAccent": "produits utiles",
+    "heroTitleSuffix": "sur le web.",
+    "heroPrompt": "actuellement",
+    "projectsEyebrow": "Le corkboard",
+    "projectsTitle": "Des projets que j’ai construits",
+    "projectsDescription": "Des solutions concrètes, de la fintech à l’intelligence artificielle.",
+    "aboutEyebrow": "La bio",
+    "aboutTitle": "À propos",
+    "offDutyTitle": "En dehors du clavier",
+    "currentLabel": "Actuellement",
+    "educationLabel": "Formation",
+    "locationLabel": "Basé à",
+    "stackEyebrow": "La boîte à outils",
+    "stackTitle": "Ma stack",
+    "stackDescription": "Ce que j’utilise pour transformer des besoins métier en produits fiables.",
+    "contactEyebrow": "La suite",
+    "contactTitle": "On construit un produit ensemble ?",
+    "contactDescription": "Disponible pour un poste, une mission freelance ou une collaboration technique.",
+    "contactCommand": "$ contact jules --email",
+    "terminalTitle": "contact.sh",
+    "scrollCue": "et ça continue plus bas ↓",
+    "viewProjects": "Voir mes projets",
+    "contactMe": "Me contacter",
+    "emailButton": "Envoyer un e-mail",
+    "whatsappButton": "Écrire sur WhatsApp",
+    "copy": "Copier",
+    "copied": "Copié ✓",
+    "projectLink": "Voir le code",
+    "modalTitle": "me.json",
+    "modalCopy": "Copier le JSON",
+    "jsonHint": "Ce fichier alimente réellement cette page — regarde le code source 👀",
+    "footer": "Fait avec du café et un peu de CSS créatif par Jules Dimitri."
+  }
 }

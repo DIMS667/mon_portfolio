@@ -11,11 +11,14 @@
     "start": "serve -s dist"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
     "classnames": "^2.5.1",
     "framer-motion": "^12.9.2",
     "lucide-react": "^0.503.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",

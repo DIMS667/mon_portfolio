@@ -1,38 +1,26 @@
-import { ThemeProvider } from './context/ThemeContext';
-import Header from './components/Header';
-import Accueil from './components/Accueil';
-import Projets from './components/Projets';
-import Competences from './components/Competences';
-import Experience from './components/Experience';
-import Certifications from './components/Certifications';
-import Contact from './components/Contact';
-import ThemeCustomizer from './components/ThemeCustomizer';
-import BackgroundAnimations from './components/BackgroundAnimations';
-import { MotionConfig } from 'framer-motion';
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import ProjectsSection from "./components/ProjectsSection";
+import AboutSection from "./components/AboutSection";
+import StackSection from "./components/StackSection";
+import ContactSection from "./components/ContactSection";
+import profile from "./data/profile.json";
 
-function App() {
+export default function App() {
   return (
-    <ThemeProvider>
-      <MotionConfig reducedMotion="user">
-        <BackgroundAnimations />
-        <a className="skip-link" href="#contenu-principal">
-          Aller au contenu principal
-        </a>
-        <div className="relative" style={{ fontFamily: 'var(--font-body)' }}>
-          <Header />
-          <main id="contenu-principal">
-            <Accueil />
-            <Projets />
-            <Competences />
-            <Experience />
-            <Certifications />
-            <Contact />
-          </main>
-          <ThemeCustomizer />
-        </div>
-      </MotionConfig>
-    </ThemeProvider>
+    <>
+      <a href="#contenu" className="skip-link">Aller au contenu</a>
+      <Navbar />
+      <main id="contenu">
+        <Hero />
+        <ProjectsSection />
+        <AboutSection />
+        <StackSection />
+        <ContactSection />
+      </main>
+      <footer className="reference-footer">
+        <p>{profile.ui.footer} <a href="#accueil">↑ retour en haut</a></p>
+      </footer>
+    </>
   );
 }
-
-export default App;
