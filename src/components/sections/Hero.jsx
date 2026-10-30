@@ -120,7 +120,7 @@ export default function Hero() {
             </div>
             <div className="scene-chip scene-chip-bottom">
               <span className="scene-chip-dot bg-violet-400" />
-              API · Fintech · IA
+              API · Fintech · Web
             </div>
           </Motion.div>
         ) : null}

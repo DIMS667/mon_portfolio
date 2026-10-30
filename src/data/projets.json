@@ -1,19 +1,5 @@
 [
   {
-    "id": "score-ia",
-    "titre": "Score IA — Scoring bancaire",
-    "categorie": "Intelligence artificielle",
-    "description": "Produit full-stack d'aide à l'analyse du risque de crédit, avec calcul d'un score de fiabilité et visualisation des demandes de prêt.",
-    "contribution": "Conception de l'API de scoring et de l'interface de consultation des analyses.",
-    "resultat": "Un parcours unifié pour transmettre les données financières et interpréter rapidement le score obtenu.",
-    "tags": ["Machine Learning", "API REST", "React.js", "Fintech"],
-    "liens": [
-      { "label": "Backend", "url": "https://github.com/DIMS667/Backend_scoring_ia" },
-      { "label": "Frontend", "url": "https://github.com/DIMS667/frontend-score-ia" }
-    ],
-    "featured": true
-  },
-  {
     "id": "publicpay",
     "titre": "PublicPay — Paiement par QR code",
     "categorie": "Fintech",
@@ -38,32 +24,6 @@
       { "label": "Code source", "url": "https://github.com/DIMS667/Maison-bleue-de-julien.git" }
     ],
     "featured": true
-  },
-  {
-    "id": "gemini-api",
-    "titre": "API REST pour Gemini",
-    "categorie": "Intelligence artificielle",
-    "description": "Service backend qui expose les capacités de Gemini à des applications clientes via une API REST simple.",
-    "contribution": "Conception des endpoints, intégration de l'API Google et préparation d'une base réutilisable côté client.",
-    "resultat": "Une couche d'abstraction qui accélère l'ajout de fonctionnalités d'intelligence artificielle.",
-    "tags": ["Gemini", "Google AI", "Backend", "API REST"],
-    "liens": [
-      { "label": "Code source", "url": "https://github.com/DIMS667/IA_GEMINI_BACKEND" }
-    ],
-    "featured": false
-  },
-  {
-    "id": "complexity",
-    "titre": "Template d'application IA",
-    "categorie": "Frontend",
-    "description": "Base d'interface moderne conçue pour intégrer rapidement des fonctionnalités d'intelligence artificielle dans un produit web.",
-    "contribution": "Architecture des composants, design responsive et préparation des points d'intégration avec une API.",
-    "resultat": "Un socle frontend réutilisable pour prototyper plus vite une expérience IA.",
-    "tags": ["React.js", "UI responsive", "Intelligence artificielle"],
-    "liens": [
-      { "label": "Code source", "url": "https://github.com/DIMS667/complexity" }
-    ],
-    "featured": false
   },
   {
     "id": "site-scolaire",

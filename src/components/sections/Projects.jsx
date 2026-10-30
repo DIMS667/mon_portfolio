@@ -1,11 +1,9 @@
 import {
   ArrowUpRight,
-  Bot,
   ExternalLink,
   Github,
   GraduationCap,
   HeartHandshake,
-  Landmark,
   LayoutDashboard,
   QrCode,
 } from "lucide-react";
@@ -15,10 +13,8 @@ import SectionHeading from "../ui/SectionHeading";
 import Reveal from "../ui/Reveal";
 
 function getProjectIcon(project) {
-  if (project.id === "score-ia") return Landmark;
   if (project.id === "publicpay") return QrCode;
   if (project.id === "maison-bleue") return HeartHandshake;
-  if (project.categorie === "Intelligence artificielle") return Bot;
   if (project.categorie === "Full-stack" || project.categorie === "Backend") return GraduationCap;
   return LayoutDashboard;
 }
@@ -50,7 +46,7 @@ export default function Projects() {
           <SectionHeading
             eyebrow="Projets récents"
             title="Des solutions concrètes, pensées pour des usages réels."
-            description="Une sélection de réalisations en fintech, intelligence artificielle, impact social et gestion métier."
+            description="Une sélection de réalisations en fintech, impact social et gestion métier."
           />
           <a className="button-secondary shrink-0" href={contact.reseaux[0].url} target="_blank" rel="noreferrer">
             Voir GitHub

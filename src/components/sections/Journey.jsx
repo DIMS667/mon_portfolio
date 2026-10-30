@@ -92,7 +92,7 @@ export default function Journey() {
               <div className="availability-icon"><BriefcaseBusiness size={24} /></div>
               <div>
                 <strong className="text-ink">Une expertise en progression continue</strong>
-                <p className="mt-1 text-sm text-muted">Architecture logicielle, intelligence artificielle, open source et produits financiers font partie de mes centres d’intérêt techniques.</p>
+                <p className="mt-1 text-sm text-muted">Architecture logicielle, qualité du code, open source et produits financiers font partie de mes centres d’intérêt techniques.</p>
               </div>
             </div>
           </Reveal>

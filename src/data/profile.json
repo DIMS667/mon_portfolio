@@ -4,19 +4,18 @@
   "handle": "jules",
   "role": "Ingénieur SI & développeur full-stack",
   "status": "Ouvert aux opportunités ☕",
-  "tagline": "Je transforme des besoins métier en produits web et mobile fiables, performants et simples à utiliser.",
+  "tagline": "Je transforme des besoins métier en produits web et mobile clairs, fiables et prêts à évoluer.",
   "roles": [
     "ingénieur SI & développeur full-stack",
-    "constructeur d’API et de produits fintech",
+    "concepteur d’API et de produits fintech",
     "développeur React, Django & Flutter",
     "du besoin métier à la mise en production"
   ],
-  "bio": "Développeur full-stack polyvalent, je travaille avec Python, Laravel et les technologies frontend modernes. J’interviens de la conception à la mise en production avec une approche pragmatique, collaborative et orientée résultats.",
+  "bio": "Développeur full-stack polyvalent, je conçois des applications web, mobiles et des API qui répondent à de vrais enjeux métier. De l’architecture à la mise en production, je privilégie des solutions lisibles, maintenables et pensées pour durer.",
   "bioHighlight": "de la conception à la mise en production",
   "offDuty": [
     "le football",
     "la lecture",
-    "l’intelligence artificielle",
     "l’architecture logicielle",
     "l’open source"
   ],
@@ -51,20 +50,9 @@
   ],
   "projects": [
     {
-      "id": "score-ia",
-      "title": "Score IA — Scoring bancaire",
-      "description": "Produit full-stack d’aide à l’analyse du risque de crédit, avec calcul d’un score de fiabilité et visualisation des demandes de prêt.",
-      "tags": ["machine-learning", "api-rest", "react", "fintech"],
-      "pin": "mint",
-      "links": [
-        { "label": "Backend", "url": "https://github.com/DIMS667/Backend_scoring_ia" },
-        { "label": "Frontend", "url": "https://github.com/DIMS667/frontend-score-ia" }
-      ]
-    },
-    {
       "id": "publicpay",
       "title": "PublicPay — Paiement QR",
-      "description": "API de paiement qui génère des QR codes et orchestre des transactions Mobile Money dans un environnement sécurisé.",
+      "description": "API de paiement qui génère des QR codes et orchestre des transactions Mobile Money dans un cadre sécurisé.",
       "tags": ["api-rest", "qr-code", "mtn-momo", "campay"],
       "pin": "coral",
       "links": [
@@ -74,7 +62,7 @@
     {
       "id": "maison-bleue",
       "title": "La Maison Bleue de Julien",
-      "description": "Expérience web destinée à une association engagée auprès des personnes autistes, avec contenus interactifs et parcours de soutien.",
+      "description": "Expérience web pour une association engagée auprès des personnes autistes, avec contenus accessibles et parcours de soutien.",
       "tags": ["react", "mantine", "cinetpay", "impact-social"],
       "pin": "grape",
       "links": [
@@ -82,29 +70,9 @@
       ]
     },
     {
-      "id": "gemini-api",
-      "title": "API REST pour Gemini",
-      "description": "Service backend qui expose les capacités de Gemini à des applications clientes via une API REST simple.",
-      "tags": ["gemini", "google-ai", "backend", "api-rest"],
-      "pin": "yellow",
-      "links": [
-        { "label": "Code source", "url": "https://github.com/DIMS667/IA_GEMINI_BACKEND" }
-      ]
-    },
-    {
-      "id": "complexity",
-      "title": "Template d’application IA",
-      "description": "Base d’interface moderne conçue pour intégrer rapidement des fonctionnalités d’intelligence artificielle dans un produit web.",
-      "tags": ["react", "ui-responsive", "intelligence-artificielle"],
-      "pin": "mint",
-      "links": [
-        { "label": "Code source", "url": "https://github.com/DIMS667/complexity" }
-      ]
-    },
-    {
       "id": "site-scolaire",
       "title": "Plateforme scolaire full-stack",
-      "description": "Application de gestion scolaire reliant une API Django REST Framework à une interface React.js.",
+      "description": "Application de gestion scolaire qui relie une API Django REST Framework à une interface React.js claire et responsive.",
       "tags": ["django", "drf", "react", "sqlite"],
       "pin": "grape",
       "links": [
@@ -114,7 +82,7 @@
     {
       "id": "gestion-ecole",
       "title": "Gestion d’établissement scolaire",
-      "description": "Application Django centralisant les informations et les opérations courantes d’un établissement scolaire.",
+      "description": "Application Django qui centralise les informations et les opérations courantes d’un établissement scolaire.",
       "tags": ["django", "python", "sqlite"],
       "pin": "coral",
       "links": [
@@ -151,7 +119,7 @@
     "heroPrompt": "actuellement",
     "projectsEyebrow": "Le corkboard",
     "projectsTitle": "Des projets que j’ai construits",
-    "projectsDescription": "Des solutions concrètes, de la fintech à l’intelligence artificielle.",
+    "projectsDescription": "Des solutions concrètes pour les paiements, l’impact social et la gestion métier.",
     "aboutEyebrow": "La bio",
     "aboutTitle": "À propos",
     "offDutyTitle": "En dehors du clavier",
