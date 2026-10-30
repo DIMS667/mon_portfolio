@@ -16,8 +16,8 @@
   "offDuty": [
     "le football",
     "la lecture",
-    "l’architecture logicielle",
-    "l’open source"
+    "la musique",
+    "les voyages"
   ],
   "location": "Douala & Yaoundé, Cameroun",
   "education": "Master 2 — Systèmes d’information et génie logiciel",
@@ -34,10 +34,20 @@
     "PHP",
     "Laravel",
     "MySQL",
+    "PostgreSQL",
+    "MongoDB",
+    "Redis",
     "Django",
+    "Django REST Framework",
     "FastAPI",
+    "Tailwind CSS",
     "Flutter",
-    "Git & GitHub"
+    "Docker",
+    "pytest",
+    "Git & GitHub",
+    "MTN Mobile Money",
+    "CamPay",
+    "CinetPay"
   ],
   "sceneIcons": [
     { "id": "javascript", "type": "mono", "label": "JS", "background": "#F7DF1E", "foreground": "#1D1B2E", "position": [2.2, 1.85, 0.2] },

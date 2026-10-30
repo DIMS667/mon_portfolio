@@ -44,9 +44,9 @@
       },
       {
         "titre": "Paiements et API financières",
-        "description": "Intégration de workflows de transaction, callbacks, webhooks, signatures et environnements sandbox ou production.",
+        "description": "Intégration de workflows de transaction, callbacks, signatures et environnements sandbox ou production.",
         "icon": "CreditCard",
-        "technologies": ["MTN MoMo", "CamPay", "CinetPay", "Maviance", "Webhooks"]
+        "technologies": ["MTN MoMo", "CamPay", "CinetPay", "Maviance"]
       }
     ]
   },
